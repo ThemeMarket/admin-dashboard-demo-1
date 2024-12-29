@@ -1,10 +1,8 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-docs',
+  selector: 'tm-docs',
   imports: [],
-  templateUrl: './docs.component.html'
+  templateUrl: './docs.component.html',
 })
-export class DocsComponent {
-
-}
+export class DocsComponent {}

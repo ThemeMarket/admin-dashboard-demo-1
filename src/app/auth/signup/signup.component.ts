@@ -1,10 +1,8 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-signup',
+  selector: 'tm-signup',
   imports: [],
-  templateUrl: './signup.component.html'
+  templateUrl: './signup.component.html',
 })
-export class SignupComponent {
-
-}
+export class SignupComponent {}

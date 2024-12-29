@@ -1,1 +1,135 @@
-<p>products works!</p>
+<section class="space-y-8 text-base">
+  <article
+    class="bg-white rounded-md border border-gray-200 p-4 flex flex-col xl:flex-row justify-between gap-3"
+  >
+    <div class="flex flex-col sm:flex-row gap-2">
+      <div class="bg-gray-50 rounded-md w-fit flex items-center">
+        <button
+          [class.display-option-active]=""
+          class="display-option display-option-active"
+        >
+          <svg
+            class="size-4 sm:size-5"
+            fill="currentColor"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 512 512"
+          >
+            <path
+              d="M40 48C26.7 48 16 58.7 16 72l0 48c0 13.3 10.7 24 24 24l48 0c13.3 0 24-10.7 24-24l0-48c0-13.3-10.7-24-24-24L40 48zM192 64c-17.7 0-32 14.3-32 32s14.3 32 32 32l288 0c17.7 0 32-14.3 32-32s-14.3-32-32-32L192 64zm0 160c-17.7 0-32 14.3-32 32s14.3 32 32 32l288 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-288 0zm0 160c-17.7 0-32 14.3-32 32s14.3 32 32 32l288 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-288 0zM16 232l0 48c0 13.3 10.7 24 24 24l48 0c13.3 0 24-10.7 24-24l0-48c0-13.3-10.7-24-24-24l-48 0c-13.3 0-24 10.7-24 24zM40 368c-13.3 0-24 10.7-24 24l0 48c0 13.3 10.7 24 24 24l48 0c13.3 0 24-10.7 24-24l0-48c0-13.3-10.7-24-24-24l-48 0z"
+            />
+          </svg>
+        </button>
+        <button [class.display-option-active]="" class="display-option">
+          <svg
+            class="size-4 sm:size-5"
+            fill="currentColor"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 448 512"
+          >
+            <path
+              d="M384 96l0 128-128 0 0-128 128 0zm0 192l0 128-128 0 0-128 128 0zM192 224L64 224 64 96l128 0 0 128zM64 288l128 0 0 128L64 416l0-128zM64 32C28.7 32 0 60.7 0 96L0 416c0 35.3 28.7 64 64 64l320 0c35.3 0 64-28.7 64-64l0-320c0-35.3-28.7-64-64-64L64 32z"
+            />
+          </svg>
+        </button>
+      </div>
+      <div class="relative sm:w-96">
+        <div
+          class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none"
+        >
+          <svg
+            class="size-5 text-gray-500"
+            fill="currentColor"
+            viewBox="0 0 20 20"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              fill-rule="evenodd"
+              clip-rule="evenodd"
+              d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+            ></path>
+          </svg>
+        </div>
+        <input
+          type="text"
+          class="bg-gray-50 border border-gray-100 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full pl-10 p-2.5"
+          placeholder="Search"
+        />
+      </div>
+    </div>
+    <div class="flex flex-col sm:flex-row md:flex-col lg:flex-row gap-2">
+      <button
+        id="sortDropdownButton"
+        data-dropdown-toggle="sortDropdown"
+        class="text-gray-500 inline-flex p-2 bg-gray-50 hover:bg-gray-100 focus:ring-4 focus:ring-gray-50 rounded-md justify-center w-full xl:w-auto"
+      >
+        Sort By:<span class="text-gray-950 ml-1 font-semibold">Default</span>
+        <svg
+          aria-hidden="true"
+          class="ml-2 size-6"
+          fill="currentColor"
+          viewBox="0 0 20 20"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+            clip-rule="evenodd"
+          ></path>
+        </svg>
+      </button>
+      <!-- Sort Dropdown -->
+      <tm-sort-dropdown />
+      <button
+        data-dropdown-toggle="filterDropdown"
+        class="text-gray-500 inline-flex items-center gap-2 p-2 bg-gray-50 hover:bg-gray-100 focus:ring-4 focus:ring-gray-50 rounded-md justify-center w-full xl:w-auto"
+      >
+        <svg
+          class="size-4"
+          fill="currentColor"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 512 512"
+        >
+          <path
+            d="M3.9 54.9C10.5 40.9 24.5 32 40 32l432 0c15.5 0 29.5 8.9 36.1 22.9s4.6 30.5-5.2 42.5L320 320.9 320 448c0 12.1-6.8 23.2-17.7 28.6s-23.8 4.3-33.5-3l-64-48c-8.1-6-12.8-15.5-12.8-25.6l0-79.1L9 97.3C-.7 85.4-2.8 68.8 3.9 54.9z"
+          />
+        </svg>
+        Filter
+        <svg
+          aria-hidden="true"
+          class="ml-1 size-6"
+          fill="currentColor"
+          viewBox="0 0 20 20"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+            clip-rule="evenodd"
+          ></path>
+        </svg>
+      </button>
+      <!-- Filter Dropdown -->
+      <tm-filter-dropdown />
+      <button
+        data-modal-target="addProductModal"
+        data-modal-toggle="addProductModal"
+        type="button"
+        class="text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:ring-primary-300 font-medium rounded-md text-sm px-4 py-2 focus:outline-none inline-flex items-center gap-2 justify-center w-full xl:w-auto"
+      >
+        <svg
+          class="size-5"
+          fill="currentColor"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 448 512"
+        >
+          <path
+            d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 144L48 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l144 0 0 144c0 17.7 14.3 32 32 32s32-14.3 32-32l0-144 144 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-144 0 0-144z"
+          />
+        </svg>
+        Add Product
+      </button>
+      <!-- Add Product Modal -->
+      <tm-add-product-modal />
+    </div>
+  </article>
+</section>

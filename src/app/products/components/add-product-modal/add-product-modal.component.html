@@ -1,0 +1,301 @@
+<div
+  id="addProductModal"
+  tabindex="-1"
+  aria-hidden="true"
+  class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full backdrop-blur-xl"
+>
+  <div class="relative p-4 w-full max-w-5xl max-h-full">
+    <!-- Modal content -->
+    <div class="relative bg-white rounded-md shadow">
+      <!-- Modal header -->
+      <div
+        class="flex items-center justify-between p-4 md:p-5 border-b rounded-t"
+      >
+        <h3 class="text-xl font-semibold text-gray-900">New Product</h3>
+        <button
+          type="button"
+          class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center"
+          data-modal-hide="addProductModal"
+        >
+          <svg
+            class="w-3 h-3"
+            aria-hidden="true"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 14 14"
+          >
+            <path
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
+            />
+          </svg>
+          <span class="sr-only">Close modal</span>
+        </button>
+      </div>
+      <!-- Modal body -->
+      <form class="p-4 md:p-5 grid grid-cols-1 lg:md:grid-cols-2 gap-4">
+        <!-- Left Side -->
+        <div class="space-y-4">
+          <h2 class="text-lg text-gray-950 font-semibold">
+            General Information
+          </h2>
+          <div class="space-y-1">
+            <label for="product-name">Name:</label>
+            <input
+              id="product-name"
+              type="text"
+              class="bg-gray-50 border border-gray-100 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5"
+              placeholder="Product name"
+            />
+          </div>
+          <div class="space-y-1">
+            <label for="product-description">Description:</label>
+            <textarea
+              id="product-description"
+              rows="6"
+              class="bg-gray-50 border border-gray-100 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5"
+              placeholder="Type something..."
+            ></textarea>
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div class="space-y-1">
+              <label for="product-price">Base Price:</label>
+              <input
+                id="product-price"
+                type="text"
+                class="bg-gray-50 border border-gray-100 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5"
+                placeholder="$999.99"
+              />
+            </div>
+            <div class="space-y-1">
+              <label for="product-stock">Stock:</label>
+              <input
+                id="product-stock"
+                type="text"
+                class="bg-gray-50 border border-gray-100 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5"
+                placeholder="10"
+              />
+            </div>
+            <div class="space-y-1">
+              <label for="product-discount">Discount:</label>
+              <input
+                id="product-discount"
+                type="text"
+                class="bg-gray-50 border border-gray-100 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5"
+                placeholder="10%"
+              />
+            </div>
+            <div class="space-y-1">
+              <span>Discount Type:</span>
+              <button
+                type="button"
+                id="productDiscountTypeToggle"
+                data-dropdown-toggle="productDiscountType"
+                class="text-gray-500 bg-gray-50 hover:bg-gray-100 focus:ring-4 focus:ring-gray-50 rounded-md inline-flex items-center justify-between w-full p-2.5"
+              >
+                None
+                <svg
+                  aria-hidden="true"
+                  class="ml-2 size-6"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                    clip-rule="evenodd"
+                  ></path>
+                </svg>
+              </button>
+              <!-- Discount Type Dropdown -->
+              <div
+                id="productDiscountType"
+                class="z-10 hidden w-64 divide-y divide-gray-100 rounded-md bg-white shadow"
+                data-popper-placement="bottom"
+              >
+                <ul class="p-2 text-left text-sm font-medium text-gray-500">
+                  <li>
+                    <a
+                      class="group inline-flex w-full items-center rounded-md px-3 py-2 text-sm text-gray-500 hover:bg-gray-100 hover:text-gray-900"
+                    >
+                      None
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      class="group inline-flex w-full items-center rounded-md px-3 py-2 text-sm text-gray-500 hover:bg-gray-100 hover:text-gray-900"
+                    >
+                      Black Friday Discount
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      class="group inline-flex w-full items-center rounded-md px-3 py-2 text-sm text-gray-500 hover:bg-gray-100 hover:text-gray-900"
+                    >
+                      Christmas Discount
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      class="group inline-flex w-full items-center rounded-md px-3 py-2 text-sm text-gray-500 hover:bg-gray-100 hover:text-gray-900"
+                    >
+                      Thanksgiving Discount
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      class="group inline-flex w-full items-center rounded-md px-3 py-2 text-sm text-gray-500 hover:bg-gray-100 hover:text-gray-900"
+                    >
+                      New Year Discount
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Right Side -->
+        <div class="space-y-4">
+          <h2 class="font-semibold text-lg text-gray-950">Upload Image</h2>
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-4">
+            <!-- Main Product Image -->
+            <div class="p-4 bg-gray-50 rounded-md grid place-content-center">
+              <img
+                class="object-contain object-center"
+                width="296"
+                height="296"
+                ngSrc="/thememarket-logo.webp"
+                alt="New Product Image"
+              />
+            </div>
+            <!-- Add new images -->
+            <div class="flex flex-wrap gap-2 items-start">
+              <div class="p-4 grid place-content-center rounded-md bg-gray-50">
+                <div class="relative size-10">
+                  <img ngSrc="/favicon.ico" alt="Product Image" fill />
+                </div>
+              </div>
+              <label
+                class="p-4 grid place-content-center rounded-md bg-gray-50 border-dashed border border-gray-500"
+              >
+                <div class="size-10 grid place-content-center">
+                  <div class="p-1.5 rounded-full bg-primary-600">
+                    <svg
+                      class="size-3 text-white"
+                      fill="currentColor"
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 448 512"
+                    >
+                      <path
+                        d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 144L48 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l144 0 0 144c0 17.7 14.3 32 32 32s32-14.3 32-32l0-144 144 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-144 0 0-144z"
+                      />
+                    </svg>
+                  </div>
+                  <input type="file" class="hidden" id="newProductImage" />
+                </div>
+              </label>
+            </div>
+          </div>
+          <!-- Product Categories -->
+          <div class="space-y-1">
+            <span>Category:</span>
+            <button
+              type="button"
+              id="productCategoryDropdownToggle"
+              data-dropdown-toggle="productCategoryDropdown"
+              class="text-gray-500 bg-gray-50 hover:bg-gray-100 focus:ring-4 focus:ring-gray-50 rounded-md inline-flex items-center justify-between w-full p-2.5"
+            >
+              None
+              <svg
+                aria-hidden="true"
+                class="ml-2 size-6"
+                fill="currentColor"
+                viewBox="0 0 20 20"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                  clip-rule="evenodd"
+                ></path>
+              </svg>
+            </button>
+            <!-- Discount Type Dropdown -->
+            <div
+              id="productCategoryDropdown"
+              class="z-10 hidden w-64 divide-y divide-gray-100 rounded-md bg-white shadow"
+              data-popper-placement="bottom"
+            >
+              <ul class="p-2 text-left text-sm font-medium text-gray-500">
+                <li>
+                  <a
+                    class="group inline-flex w-full items-center rounded-md px-3 py-2 text-sm text-gray-500 hover:bg-gray-100 hover:text-gray-900"
+                  >
+                    Gift Cards
+                  </a>
+                </li>
+                <li>
+                  <a
+                    class="group inline-flex w-full items-center rounded-md px-3 py-2 text-sm text-gray-500 hover:bg-gray-100 hover:text-gray-900"
+                  >
+                    Clothes
+                  </a>
+                </li>
+                <li>
+                  <a
+                    class="group inline-flex w-full items-center rounded-md px-3 py-2 text-sm text-gray-500 hover:bg-gray-100 hover:text-gray-900"
+                  >
+                    TVs
+                  </a>
+                </li>
+                <li>
+                  <a
+                    class="group inline-flex w-full items-center rounded-md px-3 py-2 text-sm text-gray-500 hover:bg-gray-100 hover:text-gray-900"
+                  >
+                    Laptops
+                  </a>
+                </li>
+                <li>
+                  <a
+                    class="group inline-flex w-full items-center rounded-md px-3 py-2 text-sm text-gray-500 hover:bg-gray-100 hover:text-gray-900"
+                  >
+                    Phones
+                  </a>
+                </li>
+              </ul>
+            </div>
+            <button
+              type="button"
+              class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+            >
+              Add Category
+            </button>
+          </div>
+        </div>
+      </form>
+      <!-- Modal footer -->
+      <div
+        class="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b"
+      >
+        <button
+          data-modal-hide="addProductModal"
+          type="button"
+          class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+        >
+          Add Product
+        </button>
+        <button
+          data-modal-hide="addProductModal"
+          type="button"
+          class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100"
+        >
+          Decline
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
