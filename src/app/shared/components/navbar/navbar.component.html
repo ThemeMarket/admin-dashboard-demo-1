@@ -4,6 +4,7 @@
   <div class="flex flex-wrap justify-between items-center">
     <div class="flex justify-start items-center">
       <button
+        aria-label="Open Sidebar Menu"
         data-drawer-target="drawer-navigation"
         data-drawer-toggle="drawer-navigation"
         aria-controls="drawer-navigation"
@@ -37,9 +38,13 @@
         </svg>
         <span class="sr-only">Toggle sidebar</span>
       </button>
-      <a class="flex items-center justify-between mr-4">
+      <a
+        aria-label="ThemeMarket"
+        routerLink="/"
+        class="flex items-center justify-between mr-4"
+      >
         <img
-          src="https://flowbite.s3.amazonaws.com/logo.svg"
+          src="/thememarket-logo.webp"
           class="mr-3 h-8"
           alt="ThemeMarket Logo"
         />
@@ -47,7 +52,7 @@
           >ThemeMarket</span
         >
       </a>
-      <form action="#" method="GET" class="hidden md:block md:pl-2">
+      <form class="hidden md:block md:pl-2">
         <label for="topbar-search" class="sr-only">Search</label>
         <div class="relative md:w-96">
           <div
@@ -78,6 +83,7 @@
     </div>
     <div class="flex items-center lg:order-2">
       <button
+        aria-label="Search Button"
         type="button"
         data-drawer-toggle="drawer-navigation"
         aria-controls="drawer-navigation"
@@ -99,8 +105,8 @@
           ></path>
         </svg>
       </button>
-      <!-- Apps -->
       <button
+        aria-label="View Notifications"
         type="button"
         data-dropdown-toggle="apps-dropdown"
         class="p-2 text-gray-500 rounded-lg hover:text-gray-900 hover:bg-gray-100 focus:ring-4 focus:ring-gray-300"
@@ -129,7 +135,11 @@
           Apps
         </div>
         <div class="grid grid-cols-3 gap-4 p-4">
-          <a class="block p-4 text-center rounded-lg hover:bg-gray-100 group">
+          <a
+            aria-label="Go to Sales"
+            routerLink="/sales"
+            class="block p-4 text-center rounded-lg hover:bg-gray-100 group"
+          >
             <svg
               aria-hidden="true"
               class="mx-auto mb-1 w-7 h-7 text-gray-400 group-hover:text-gray-500"
@@ -145,7 +155,11 @@
             </svg>
             <div class="text-sm text-gray-900">Sales</div>
           </a>
-          <a class="block p-4 text-center rounded-lg hover:bg-gray-100 group">
+          <a
+            aria-label="Go to Products"
+            routerLink="/products"
+            class="block p-4 text-center rounded-lg hover:bg-gray-100 group"
+          >
             <svg
               aria-hidden="true"
               class="mx-auto mb-1 w-7 h-7 text-gray-400 group-hover:text-gray-500"
@@ -162,7 +176,11 @@
             </svg>
             <div class="text-sm text-gray-900">Products</div>
           </a>
-          <a class="block p-4 text-center rounded-lg hover:bg-gray-100 group">
+          <a
+            aria-label="LogOut"
+            role="button"
+            class="block p-4 text-center rounded-lg hover:bg-gray-100 group"
+          >
             <svg
               aria-hidden="true"
               class="mx-auto mb-1 w-7 h-7 text-gray-400 group-hover:text-gray-500"
@@ -211,9 +229,9 @@
         </div>
         <ul class="py-1 text-gray-700" aria-labelledby="dropdown">
           <li>
-            <a href="#" class="block py-2 px-4 text-sm hover:bg-gray-100"
-              >Sign out</a
-            >
+            <a role="button" class="block py-2 px-4 text-sm hover:bg-gray-100">
+              Sign out
+            </a>
           </li>
         </ul>
       </div>
