@@ -41,14 +41,15 @@
       <a
         aria-label="ThemeMarket"
         routerLink="/"
-        class="flex items-center justify-between mr-4"
+        class="flex items-center justify-between mr-4 -ml-4"
       >
         <img
           src="/thememarket-logo.webp"
-          class="mr-3 h-8"
+          class="h-10 sm:h-12 object-contain object-center"
           alt="ThemeMarket Logo"
         />
-        <span class="self-center text-2xl font-semibold whitespace-nowrap"
+        <span
+          class="-ml-2 self-center text-lg sm:text-xl font-semibold whitespace-nowrap"
           >ThemeMarket</span
         >
       </a>
@@ -87,7 +88,7 @@
         type="button"
         data-drawer-toggle="drawer-navigation"
         aria-controls="drawer-navigation"
-        class="p-2 mr-1 text-gray-500 rounded-lg md:hidden hover:text-gray-900 hover:bg-gray-100 focus:ring-4 focus:ring-gray-300"
+        class="p-2 text-gray-500 rounded-lg md:hidden hover:text-gray-900 hover:bg-gray-100 focus:ring-4 focus:ring-gray-300"
       >
         <span class="sr-only">Toggle search</span>
         <svg
@@ -202,7 +203,7 @@
       </div>
       <button
         type="button"
-        class="flex mx-3 text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300"
+        class="flex mx-2 text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300"
         id="user-menu-button"
         aria-expanded="false"
         data-dropdown-toggle="dropdown"
