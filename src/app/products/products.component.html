@@ -1,4 +1,4 @@
-<section class="space-y-8 text-base">
+<section class="space-y-2 text-base">
   <article
     class="bg-white rounded-md border border-gray-200 p-4 flex flex-col xl:flex-row justify-between gap-3"
   >
@@ -130,6 +130,238 @@
       </button>
       <!-- Add Product Modal -->
       <tm-add-product-modal />
+    </div>
+  </article>
+  <article
+    class="bg-white rounded-md border border-gray-200 flex flex-col xl:flex-row justify-between gap-3 p-4"
+  >
+    <div class="overflow-x-auto w-full">
+      <table class="w-full text-sm text-left text-gray-500">
+        <thead class="text-xs text-gray-700 uppercase bg-gray-50">
+          <tr>
+            <th scope="col" class="p-4">
+              <div class="flex items-center">
+                <input
+                  id="checkbox-all"
+                  type="checkbox"
+                  class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 focus:ring-2"
+                />
+                <label for="checkbox-all" class="sr-only">checkbox</label>
+              </div>
+            </th>
+            <th scope="col" class="px-4 py-3">Product Name</th>
+            <th scope="col" class="px-4 py-3">Category</th>
+            <th scope="col" class="px-4 py-3">Stock</th>
+            <th scope="col" class="px-4 py-3">Price</th>
+            <th scope="col" class="px-4 py-3">Rating</th>
+            <th scope="col" class="px-4 py-3">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="border-b hover:bg-gray-100">
+            <td class="w-4 px-4 py-3">
+              <div class="flex items-center">
+                <input
+                  id="checkbox-table-search-1"
+                  type="checkbox"
+                  class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 focus:ring-2"
+                />
+                <label for="checkbox-table-search-1" class="sr-only"
+                  >checkbox</label
+                >
+              </div>
+            </td>
+            <th
+              scope="row"
+              class="flex items-center px-4 py-2 font-medium text-gray-900 whitespace-nowrap"
+            >
+              <img
+                src="https://flowbite.s3.amazonaws.com/blocks/application-ui/devices/benq-ex2710q.png"
+                alt="iMac Front Image"
+                class="w-auto h-8 mr-3"
+              />
+              Monitor BenQ EX2710Q
+            </th>
+            <td class="px-4 py-2">
+              <span
+                class="bg-primary-100 text-primary-800 text-xs font-medium px-2 py-0.5 rounded"
+                >TV/Monitor</span
+              >
+            </td>
+            <td class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">
+              <div class="flex items-center">
+                <div
+                  class="inline-block w-4 h-4 mr-2 bg-green-500 rounded-full"
+                ></div>
+                1242
+              </div>
+            </td>
+            <td class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">
+              $299
+            </td>
+            <td class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">
+              <div class="flex items-center">
+                <svg
+                  aria-hidden="true"
+                  class="w-5 h-5 text-yellow-400"
+                  fill="currentColor"
+                  viewbox="0 0 20 20"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
+                  />
+                </svg>
+                <svg
+                  aria-hidden="true"
+                  class="w-5 h-5 text-yellow-400"
+                  fill="currentColor"
+                  viewbox="0 0 20 20"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
+                  />
+                </svg>
+                <svg
+                  aria-hidden="true"
+                  class="w-5 h-5 text-yellow-400"
+                  fill="currentColor"
+                  viewbox="0 0 20 20"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
+                  />
+                </svg>
+                <svg
+                  aria-hidden="true"
+                  class="w-5 h-5 text-yellow-400"
+                  fill="currentColor"
+                  viewbox="0 0 20 20"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
+                  />
+                </svg>
+                <svg
+                  aria-hidden="true"
+                  class="w-5 h-5 text-gray-300"
+                  fill="currentColor"
+                  viewbox="0 0 20 20"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
+                  />
+                </svg>
+                <span class="ml-1 text-gray-500">4.0</span>
+              </div>
+            </td>
+            <td class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">
+              <button
+                data-modal-toggle="editProductModal"
+                data-modal-target="editProductModal"
+                class="me-2 text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:ring-primary-300 font-medium rounded-md text-sm px-4 py-2 focus:outline-none inline-flex items-center gap-2 justify-center"
+              >
+                <svg
+                  class="size-4"
+                  fill="currentColor"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 512 512"
+                >
+                  <path
+                    d="M471.6 21.7c-21.9-21.9-57.3-21.9-79.2 0L362.3 51.7l97.9 97.9 30.1-30.1c21.9-21.9 21.9-57.3 0-79.2L471.6 21.7zm-299.2 220c-6.1 6.1-10.8 13.6-13.5 21.9l-29.6 88.8c-2.9 8.6-.6 18.1 5.8 24.6s15.9 8.7 24.6 5.8l88.8-29.6c8.2-2.7 15.7-7.4 21.9-13.5L437.7 172.3 339.7 74.3 172.4 241.7zM96 64C43 64 0 107 0 160L0 416c0 53 43 96 96 96l256 0c53 0 96-43 96-96l0-96c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 96c0 17.7-14.3 32-32 32L96 448c-17.7 0-32-14.3-32-32l0-256c0-17.7 14.3-32 32-32l96 0c17.7 0 32-14.3 32-32s-14.3-32-32-32L96 64z"
+                  />
+                </svg>
+                Edit
+              </button>
+              <button
+                data-modal-toggle="deleteProductModal"
+                data-modal-target="deleteProductModal"
+                class="border border-gray-200 text-gray-500 bg-gray-50 rounded-md p-2.5 hover:text-red-600"
+              >
+                <div class="sr-only">Delete Button</div>
+                <svg
+                  class="size-4"
+                  fill="currentColor"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 448 512"
+                >
+                  <path
+                    d="M135.2 17.7C140.6 6.8 151.7 0 163.8 0L284.2 0c12.1 0 23.2 6.8 28.6 17.7L320 32l96 0c17.7 0 32 14.3 32 32s-14.3 32-32 32L32 96C14.3 96 0 81.7 0 64S14.3 32 32 32l96 0 7.2-14.3zM32 128l384 0 0 320c0 35.3-28.7 64-64 64L96 512c-35.3 0-64-28.7-64-64l0-320zm96 64c-8.8 0-16 7.2-16 16l0 224c0 8.8 7.2 16 16 16s16-7.2 16-16l0-224c0-8.8-7.2-16-16-16zm96 0c-8.8 0-16 7.2-16 16l0 224c0 8.8 7.2 16 16 16s16-7.2 16-16l0-224c0-8.8-7.2-16-16-16zm96 0c-8.8 0-16 7.2-16 16l0 224c0 8.8 7.2 16 16 16s16-7.2 16-16l0-224c0-8.8-7.2-16-16-16z"
+                  />
+                </svg>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <!-- Delete Product Modal -->
+      <tm-delete-product-modal />
+      <!-- Edit Product Modal -->
+      <tm-edit-product-modal />
+      <!-- Products Navigation -->
+      <nav
+        class="flex flex-col items-start justify-between p-4 space-y-3 md:flex-row md:items-center md:space-y-0"
+        aria-label="Table navigation"
+      >
+        <span class="text-sm font-normal text-gray-500">
+          Showing
+          <span class="font-semibold text-gray-900">1-10</span>
+          of
+          <span class="font-semibold text-gray-900">1000</span>
+        </span>
+        <ul class="inline-flex items-stretch -space-x-px">
+          <li>
+            <a
+              class="flex items-center justify-center h-full py-1.5 px-3 ml-0 text-gray-500 bg-white rounded-l-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700"
+            >
+              <span class="sr-only">Previous</span>
+              <svg
+                class="w-5 h-5"
+                aria-hidden="true"
+                fill="currentColor"
+                viewbox="0 0 20 20"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
+                  clip-rule="evenodd"
+                />
+              </svg>
+            </a>
+          </li>
+          <li>
+            <a
+              class="flex items-center justify-center px-3 py-2 text-sm leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700"
+              >1</a
+            >
+          </li>
+          <li>
+            <a
+              class="flex items-center justify-center h-full py-1.5 px-3 leading-tight text-gray-500 bg-white rounded-r-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700"
+            >
+              <span class="sr-only">Next</span>
+              <svg
+                class="w-5 h-5"
+                aria-hidden="true"
+                fill="currentColor"
+                viewbox="0 0 20 20"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                  clip-rule="evenodd"
+                />
+              </svg>
+            </a>
+          </li>
+        </ul>
+      </nav>
     </div>
   </article>
 </section>
