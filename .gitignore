@@ -20,10 +20,13 @@ yarn-error.log
 .settings/
 *.sublime-workspace
 
+package-lock.json
+
 #Angular
 .angular
 
 # Visual Studio Code
+.vscode
 .vscode/*
 !.vscode/settings.json
 !.vscode/tasks.json
