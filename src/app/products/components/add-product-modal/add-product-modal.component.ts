@@ -35,21 +35,13 @@ export class AddProductModalComponent {
 
   formSubmitted = signal<boolean>(false);
   showInvalidImageToast = signal<boolean>(false);
-  showImageRequiredToast = signal<boolean>(false);
+  showRequiredImageToast = signal<boolean>(false);
 
-  changeDiscountType(discountType: string) {
-    this.discountType.set(discountType);
-  }
-
-  changeCategory(category: string) {
-    this.category.set(category);
-  }
-
-  hasErrors(fieldName: string, errorType: string) {
+  hasErrors(fieldName: string, errorType: string): boolean {
     return hasErrorForm(this.form, fieldName, errorType);
   }
 
-  loadImage(e: Event) {
+  loadImage(e: Event): void {
     const input = e.target as HTMLInputElement;
     const files = input.files;
 
@@ -58,11 +50,12 @@ export class AddProductModalComponent {
 
       if (!file.type.startsWith('image')) {
         this.showInvalidImageToast.set(true);
-      } else {
-        this.imageService.toBase64(file).then((img) => {
-          this.images.update((imgs) => [...imgs, img]);
-        });
+        return;
       }
+
+      this.imageService.toBase64(file).then((img) => {
+        this.images.update((imgs) => [...imgs, img]);
+      });
     }
   }
 
@@ -79,28 +72,28 @@ export class AddProductModalComponent {
 
   onSubmit() {
     if (this.images().length === 0) {
-      this.showImageRequiredToast.set(true);
+      this.showRequiredImageToast.set(true);
       return;
     }
 
-    if (this.form.valid) {
-      this.formSubmitted.set(true);
-      const formValues = this.form.value;
+    if (!this.form.valid) return;
 
-      this.productService
-        .create({
-          name: formValues.name!,
-          description: formValues.description!,
-          stock: Number(formValues.stock),
-          price: Number(formValues.price),
-          discount: Number(formValues.discount),
-          discountType: this.discountType(),
-          category: this.category(),
-          images: this.images(),
-        })
-        .subscribe((newProduct) => {
-          this.newProductEvent.emit(newProduct);
-        });
-    }
+    this.formSubmitted.set(true);
+    const formValues = this.form.value;
+
+    this.productService
+      .create({
+        name: formValues.name!,
+        description: formValues.description!,
+        stock: Number(formValues.stock),
+        price: Number(formValues.price),
+        discount: Number(formValues.discount),
+        discountType: this.discountType(),
+        category: this.category(),
+        images: this.images(),
+      })
+      .subscribe((newProduct) => {
+        this.newProductEvent.emit(newProduct);
+      });
   }
 }

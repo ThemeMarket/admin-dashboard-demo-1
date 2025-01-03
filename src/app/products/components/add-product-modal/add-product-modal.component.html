@@ -183,7 +183,7 @@
                     <li>
                       <a
                         role="button"
-                        (click)="changeDiscountType('')"
+                        (click)="discountType.set('')"
                         class="group inline-flex w-full items-center rounded-md px-3 py-2 text-sm text-gray-500 hover:bg-gray-100 hover:text-gray-900"
                       >
                         None
@@ -192,7 +192,7 @@
                     <li>
                       <a
                         role="button"
-                        (click)="changeDiscountType('Black Friday Discount')"
+                        (click)="discountType.set('Black Friday Discount')"
                         class="group inline-flex w-full items-center rounded-md px-3 py-2 text-sm text-gray-500 hover:bg-gray-100 hover:text-gray-900"
                       >
                         Black Friday Discount
@@ -201,7 +201,7 @@
                     <li>
                       <a
                         role="button"
-                        (click)="changeDiscountType('Christmas Discount')"
+                        (click)="discountType.set('Christmas Discount')"
                         class="group inline-flex w-full items-center rounded-md px-3 py-2 text-sm text-gray-500 hover:bg-gray-100 hover:text-gray-900"
                       >
                         Christmas Discount
@@ -210,7 +210,7 @@
                     <li>
                       <a
                         role="button"
-                        (click)="changeDiscountType('Thanksgiving Discount')"
+                        (click)="discountType.set('Thanksgiving Discount')"
                         class="group inline-flex w-full items-center rounded-md px-3 py-2 text-sm text-gray-500 hover:bg-gray-100 hover:text-gray-900"
                       >
                         Thanksgiving Discount
@@ -219,7 +219,7 @@
                     <li>
                       <a
                         role="button"
-                        (click)="changeDiscountType('New Year Discount')"
+                        (click)="discountType.set('New Year Discount')"
                         class="group inline-flex w-full items-center rounded-md px-3 py-2 text-sm text-gray-500 hover:bg-gray-100 hover:text-gray-900"
                       >
                         New Year Discount
@@ -352,7 +352,7 @@
                   <li>
                     <a
                       role="button"
-                      (click)="changeCategory('None')"
+                      (click)="category.set('')"
                       class="group inline-flex w-full items-center rounded-md px-3 py-2 text-sm text-gray-500 hover:bg-gray-100 hover:text-gray-900"
                     >
                       None
@@ -361,7 +361,7 @@
                   <li>
                     <a
                       role="button"
-                      (click)="changeCategory('Gift Cards')"
+                      (click)="category.set('Gift Cards')"
                       class="group inline-flex w-full items-center rounded-md px-3 py-2 text-sm text-gray-500 hover:bg-gray-100 hover:text-gray-900"
                     >
                       Gift Cards
@@ -370,7 +370,7 @@
                   <li>
                     <a
                       role="button"
-                      (click)="changeCategory('Clothes')"
+                      (click)="category.set('Clothes')"
                       class="group inline-flex w-full items-center rounded-md px-3 py-2 text-sm text-gray-500 hover:bg-gray-100 hover:text-gray-900"
                     >
                       Clothes
@@ -379,7 +379,7 @@
                   <li>
                     <a
                       role="button"
-                      (click)="changeCategory('TVs')"
+                      (click)="category.set('TVs')"
                       class="group inline-flex w-full items-center rounded-md px-3 py-2 text-sm text-gray-500 hover:bg-gray-100 hover:text-gray-900"
                     >
                       TVs
@@ -388,7 +388,7 @@
                   <li>
                     <a
                       role="button"
-                      (click)="changeCategory('Laptops')"
+                      (click)="category.set('Laptops')"
                       class="group inline-flex w-full items-center rounded-md px-3 py-2 text-sm text-gray-500 hover:bg-gray-100 hover:text-gray-900"
                     >
                       Laptops
@@ -397,7 +397,7 @@
                   <li>
                     <a
                       role="button"
-                      (click)="changeCategory('Phones')"
+                      (click)="category.set('Phones')"
                       class="group inline-flex w-full items-center rounded-md px-3 py-2 text-sm text-gray-500 hover:bg-gray-100 hover:text-gray-900"
                     >
                       Phones
@@ -531,7 +531,7 @@
       </svg>
     </button>
   </div>
-  } @if (showImageRequiredToast()) {
+  } @if (showRequiredImageToast()) {
   <div
     id="toast-danger"
     class="flex items-center w-full max-w-xs p-4 mb-2 text-gray-500 bg-white rounded-md shadow"
@@ -557,7 +557,7 @@
       An image is required for this product.
     </div>
     <button
-      (click)="showImageRequiredToast.set(false)"
+      (click)="showRequiredImageToast.set(false)"
       type="button"
       class="ms-auto -mx-1.5 -my-1.5 bg-white text-gray-400 hover:text-gray-900 rounded-md focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex items-center justify-center h-8 w-8"
       data-dismiss-target="#toast-danger"
