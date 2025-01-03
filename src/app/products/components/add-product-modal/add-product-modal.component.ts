@@ -1,13 +1,14 @@
-import { Component, inject, output, signal } from '@angular/core';
+import { Component, inject, output, signal, viewChild } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { hasErrorForm } from '../../../shared/utils/has-error-form';
 import { ImageService } from '../../../core/services/image.service';
 import { ProductService } from '../../../core/services/product.service';
 import { Product } from '../../../shared/models/product';
+import { NotificationDirective } from '../../../core/directives/notification.directive';
 
 @Component({
   selector: 'tm-add-product-modal',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, NotificationDirective],
   templateUrl: './add-product-modal.component.html',
   styleUrls: ['../../../shared/styles/forms.css'],
 })
@@ -33,9 +34,9 @@ export class AddProductModalComponent {
   category = signal<string>('None');
   images = signal<string[]>([]);
 
-  formSubmitted = signal<boolean>(false);
-  showInvalidImageToast = signal<boolean>(false);
-  showRequiredImageToast = signal<boolean>(false);
+  notificationDirective = viewChild<NotificationDirective>(
+    'notificationDirective'
+  );
 
   hasErrors(fieldName: string, errorType: string): boolean {
     return hasErrorForm(this.form, fieldName, errorType);
@@ -49,7 +50,10 @@ export class AddProductModalComponent {
       const file = files[0];
 
       if (!file.type.startsWith('image')) {
-        this.showInvalidImageToast.set(true);
+        this.notificationDirective()?.notify(
+          'The selected file is not a valid image.',
+          'warning'
+        );
         return;
       }
 
@@ -72,13 +76,18 @@ export class AddProductModalComponent {
 
   onSubmit() {
     if (this.images().length === 0) {
-      this.showRequiredImageToast.set(true);
+      this.notificationDirective()?.notify(
+        'An image is required for this product.',
+        'warning'
+      );
       return;
     }
-
     if (!this.form.valid) return;
 
-    this.formSubmitted.set(true);
+    this.notificationDirective()?.notify(
+      'Product added successfully.',
+      'success'
+    );
     const formValues = this.form.value;
 
     this.productService
@@ -92,8 +101,15 @@ export class AddProductModalComponent {
         category: this.category(),
         images: this.images(),
       })
-      .subscribe((newProduct) => {
-        this.newProductEvent.emit(newProduct);
+      .subscribe({
+        next: (newProduct) => {
+          this.newProductEvent.emit(newProduct);
+        },
+        error: () =>
+          this.notificationDirective()?.notify(
+            'A server error has occurred',
+            'error'
+          ),
       });
   }
 }
