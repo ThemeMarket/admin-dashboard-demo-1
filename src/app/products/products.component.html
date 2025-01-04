@@ -260,13 +260,17 @@
     >
       <span class="text-sm font-normal text-gray-500">
         Showing
-        <span class="font-semibold text-gray-900">1-10</span>
+        <span class="font-semibold text-gray-900">
+          {{ showingProducts }}
+        </span>
         of
-        <span class="font-semibold text-gray-900">{{ products.length }}</span>
+        <span class="font-semibold text-gray-900">{{ totalProducts }}</span>
       </span>
       <ul class="inline-flex items-stretch -space-x-px">
         <li>
           <a
+            role="button"
+            (click)="loadPage(selectedPage() - 1)"
             class="flex items-center justify-center h-full py-1.5 px-3 ml-0 text-gray-500 bg-white rounded-l-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700"
           >
             <span class="sr-only">Previous</span>
@@ -288,11 +292,13 @@
         <li>
           <a
             class="flex items-center justify-center px-3 py-2 text-sm leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700"
-            >1</a
+            >{{ selectedPage() }}</a
           >
         </li>
         <li>
           <a
+            role="button"
+            (click)="loadPage(selectedPage() + 1)"
             class="flex items-center justify-center h-full py-1.5 px-3 leading-tight text-gray-500 bg-white rounded-r-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700"
           >
             <span class="sr-only">Next</span>
