@@ -6,7 +6,7 @@ import { ToastComponent } from '../../shared/components/toast/toast.component';
   exportAs: 'tmNotification',
 })
 export class NotificationDirective {
-  viewContainerRef = inject(ViewContainerRef);
+  private readonly viewContainerRef = inject(ViewContainerRef);
 
   createNotification(message: string, type: 'error' | 'success' | 'warning') {
     const componentRef = this.viewContainerRef.createComponent(ToastComponent);
