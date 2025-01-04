@@ -52,4 +52,8 @@ export class ProductsComponent implements OnInit {
       initFlowbite();
     }, 100);
   }
+
+  addProduct(product: Product) {
+    this.products.push(product);
+  }
 }

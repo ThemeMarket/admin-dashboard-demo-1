@@ -100,7 +100,7 @@
         Add Product
       </button>
       <!-- Add Product Modal -->
-      <tm-add-product-modal />
+      <tm-add-product-modal (productAddedEvent)="addProduct($event)" />
     </div>
   </article>
   <article class="bg-white rounded-md border border-gray-200 p-4">
@@ -167,7 +167,7 @@
                   [class.bg-yellow-300]="
                     product.stock > 65 && product.stock < 85
                   "
-                  [class.bg-red-500]="product.stock > 12 && product.stock < 65"
+                  [class.bg-red-500]="product.stock < 65"
                   class="inline-block w-4 h-4 mr-2 rounded-full"
                 ></div>
                 {{ product.stock }}
@@ -254,7 +254,7 @@
         Showing
         <span class="font-semibold text-gray-900">1-10</span>
         of
-        <span class="font-semibold text-gray-900">1000</span>
+        <span class="font-semibold text-gray-900">{{ products.length }}</span>
       </span>
       <ul class="inline-flex items-stretch -space-x-px">
         <li>

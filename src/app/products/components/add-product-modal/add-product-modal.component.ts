@@ -1,4 +1,11 @@
-import { Component, inject, output, signal, viewChild } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  inject,
+  output,
+  signal,
+  viewChild,
+} from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { hasErrorForm } from '../../../shared/utils/has-error-form';
 import { ImageService } from '../../../core/services/image.service';
@@ -13,15 +20,20 @@ import { NotificationDirective } from '../../../core/directives/notification.dir
   styleUrls: ['../../../shared/styles/forms.css'],
 })
 export class AddProductModalComponent {
-  formBuilder = inject(FormBuilder);
-  imageService = inject(ImageService);
-  productService = inject(ProductService);
+  private readonly formBuilder = inject(FormBuilder);
+  private readonly imageService = inject(ImageService);
+  private readonly productService = inject(ProductService);
+  private readonly notificationDirective = viewChild<NotificationDirective>(
+    'notificationDirective'
+  );
+  private readonly closeBtn =
+    viewChild<ElementRef<HTMLButtonElement>>('closeBtn');
 
-  newProductEvent = output<Product>();
+  productAddedEvent = output<Product>();
 
   form = this.formBuilder.group({
     name: ['', Validators.required],
-    description: ['', [Validators.required, Validators.minLength(25)]],
+    description: ['', [Validators.required, Validators.minLength(50)]],
     price: ['', [Validators.required, Validators.min(1)]],
     stock: [
       '',
@@ -33,10 +45,6 @@ export class AddProductModalComponent {
   discountType = signal<string>('None');
   category = signal<string>('None');
   images = signal<string[]>([]);
-
-  notificationDirective = viewChild<NotificationDirective>(
-    'notificationDirective'
-  );
 
   hasErrors(fieldName: string, errorType: string): boolean {
     return hasErrorForm(this.form, fieldName, errorType);
@@ -75,20 +83,28 @@ export class AddProductModalComponent {
   }
 
   onSubmit() {
+    if (!this.form.valid) return;
+
+    const formValues = this.form.value;
+
     if (this.images().length === 0) {
       this.notificationDirective()?.createNotification(
         'An image is required for this product.',
         'warning'
       );
       return;
+    } else if (this.discountType() && !formValues.discount) {
+      this.notificationDirective()?.createNotification(
+        'Product with a discount type must have a discount greater than 0.',
+        'warning'
+      );
+      return;
     }
-    if (!this.form.valid) return;
 
     this.notificationDirective()?.createNotification(
       'Product added successfully.',
       'success'
     );
-    const formValues = this.form.value;
 
     this.productService
       .create({
@@ -103,7 +119,8 @@ export class AddProductModalComponent {
       })
       .subscribe({
         next: (newProduct) => {
-          this.newProductEvent.emit(newProduct);
+          this.productAddedEvent.emit(newProduct);
+          this.closeBtn()?.nativeElement.click();
         },
         error: () =>
           this.notificationDirective()?.createNotification(

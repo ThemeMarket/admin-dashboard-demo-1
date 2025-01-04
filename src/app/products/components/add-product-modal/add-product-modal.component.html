@@ -15,6 +15,7 @@
         <button
           type="button"
           class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-md text-sm w-8 h-8 ms-auto inline-flex justify-center items-center"
+          #closeBtn
           data-modal-hide="addProductModal"
           (click)="discard()"
         >
@@ -397,6 +398,15 @@
                   <li>
                     <a
                       role="button"
+                      (click)="category.set('Gaming/Console')"
+                      class="group inline-flex w-full items-center rounded-md px-3 py-2 text-sm text-gray-500 hover:bg-gray-100 hover:text-gray-900"
+                    >
+                      Gaming/Console
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      role="button"
                       (click)="category.set('Phones')"
                       class="group inline-flex w-full items-center rounded-md px-3 py-2 text-sm text-gray-500 hover:bg-gray-100 hover:text-gray-900"
                     >
@@ -414,6 +424,7 @@
         >
           <button
             type="submit"
+            #addBtn
             class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-md text-sm px-5 py-2.5 text-center"
           >
             Add Product
