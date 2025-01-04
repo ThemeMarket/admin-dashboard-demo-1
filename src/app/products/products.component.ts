@@ -30,16 +30,15 @@ export class ProductsComponent implements OnInit {
   notificationDirective = viewChild<NotificationDirective>(
     'notificationDirective'
   );
-
-  /* Query params that I'll use to manipulate the products */
-  displayBy = input<string>();
-
   products: Product[] = [];
 
   ngOnInit(): void {
     this.productService.getAll().subscribe({
       next: (products) => {
         this.products = products;
+        setTimeout(() => {
+          initFlowbite();
+        }, 100);
       },
       error: () =>
         this.notificationDirective()?.createNotification(
@@ -47,14 +46,14 @@ export class ProductsComponent implements OnInit {
           'error'
         ),
     });
-
-    setTimeout(() => {
-      initFlowbite();
-    }, 100);
   }
 
   addProduct(product: Product) {
     this.products.push(product);
+    /* Update modal events */
+    setTimeout(() => {
+      initFlowbite();
+    }, 100);
   }
 
   deleteProduct(target: Product) {
