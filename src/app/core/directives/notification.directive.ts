@@ -8,7 +8,7 @@ import { ToastComponent } from '../../shared/components/toast/toast.component';
 export class NotificationDirective {
   viewContainerRef = inject(ViewContainerRef);
 
-  notify(message: string, type: 'error' | 'success' | 'warning') {
+  createNotification(message: string, type: 'error' | 'success' | 'warning') {
     const componentRef = this.viewContainerRef.createComponent(ToastComponent);
     componentRef.setInput('message', message);
     componentRef.setInput('type', type);

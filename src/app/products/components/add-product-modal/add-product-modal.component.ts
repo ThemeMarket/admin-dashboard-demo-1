@@ -50,7 +50,7 @@ export class AddProductModalComponent {
       const file = files[0];
 
       if (!file.type.startsWith('image')) {
-        this.notificationDirective()?.notify(
+        this.notificationDirective()?.createNotification(
           'The selected file is not a valid image.',
           'warning'
         );
@@ -76,7 +76,7 @@ export class AddProductModalComponent {
 
   onSubmit() {
     if (this.images().length === 0) {
-      this.notificationDirective()?.notify(
+      this.notificationDirective()?.createNotification(
         'An image is required for this product.',
         'warning'
       );
@@ -84,7 +84,7 @@ export class AddProductModalComponent {
     }
     if (!this.form.valid) return;
 
-    this.notificationDirective()?.notify(
+    this.notificationDirective()?.createNotification(
       'Product added successfully.',
       'success'
     );
@@ -106,7 +106,7 @@ export class AddProductModalComponent {
           this.newProductEvent.emit(newProduct);
         },
         error: () =>
-          this.notificationDirective()?.notify(
+          this.notificationDirective()?.createNotification(
             'A server error has occurred',
             'error'
           ),
