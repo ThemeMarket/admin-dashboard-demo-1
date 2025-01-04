@@ -203,6 +203,7 @@
               <button
                 data-modal-toggle="deleteProductModal"
                 data-modal-target="deleteProductModal"
+                (click)="deleteProductModal.setProduct(product)"
                 class="inline-flex border border-gray-200 text-gray-500 bg-gray-50 rounded-md p-2.5 hover:text-red-600"
               >
                 <svg
@@ -242,7 +243,10 @@
       }
     </div>
     <!-- Delete Product Modal -->
-    <tm-delete-product-modal />
+    <tm-delete-product-modal
+      #deleteProductModal
+      (productDeletedEvent)="deleteProduct($event)"
+    />
     <!-- Edit Product Modal -->
     <tm-edit-product-modal />
     <!-- Products Navigation -->

@@ -56,4 +56,8 @@ export class ProductsComponent implements OnInit {
   addProduct(product: Product) {
     this.products.push(product);
   }
+
+  deleteProduct(target: Product) {
+    this.products = this.products.filter((product) => product.id !== target.id);
+  }
 }

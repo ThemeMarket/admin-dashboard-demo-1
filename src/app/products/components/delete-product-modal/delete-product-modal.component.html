@@ -8,6 +8,7 @@
     <!-- Modal content -->
     <div class="relative p-4 text-center bg-white rounded-lg shadow sm:p-5">
       <button
+        #closeBtn
         type="button"
         class="text-gray-400 absolute top-2.5 right-2.5 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center"
         data-modal-toggle="deleteProductModal"
@@ -54,6 +55,7 @@
         </button>
         <button
           type="submit"
+          (click)="delete()"
           class="py-2 px-3 text-sm font-medium text-center text-white bg-red-600 rounded-lg hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300"
         >
           Yes, I'm sure
@@ -62,3 +64,7 @@
     </div>
   </div>
 </div>
+<ng-container
+  #notificationDirective="tmNotification"
+  tmNotification
+></ng-container>

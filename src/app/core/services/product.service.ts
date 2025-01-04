@@ -23,4 +23,8 @@ export class ProductService {
       .get<Product[] | null>(this.baseUrl)
       .pipe(map((products) => (products ? products : [])));
   }
+
+  delete(id: string): Observable<Product> {
+    return this.http.delete<Product>(`${this.baseUrl}/${id}`);
+  }
 }
