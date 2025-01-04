@@ -1,7 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { CreateProductDto } from '../dto/create-product';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { Product } from '../../shared/models/product';
 
 @Injectable({
@@ -16,5 +16,11 @@ export class ProductService {
     const product = { id, ...createProductDto };
 
     return this.http.post<Product>(this.baseUrl, product);
+  }
+
+  getAll(): Observable<Product[]> {
+    return this.http
+      .get<Product[] | null>(this.baseUrl)
+      .pipe(map((products) => (products ? products : [])));
   }
 }
