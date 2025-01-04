@@ -95,7 +95,7 @@ export class ProductsComponent {
   }
 
   loadPage(page: number) {
-    if (page < 1 || this.totalProducts < page * 6) return;
+    if (page < 1 || Math.ceil(this.totalProducts / 6) < page) return;
 
     this.router.navigate(['/products'], {
       queryParams: {

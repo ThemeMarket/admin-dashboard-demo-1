@@ -41,7 +41,9 @@ export class ProductService {
           return {
             products: pageProducts,
             total: products.length,
-            showing: `${startIndex + 1}-${page * limit}`,
+            showing: `${startIndex + 1}-${
+              page * limit > products.length ? products.length : page * limit
+            }`,
           };
         })
       );
