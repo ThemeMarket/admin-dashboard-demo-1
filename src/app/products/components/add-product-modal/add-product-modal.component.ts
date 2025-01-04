@@ -42,8 +42,8 @@ export class AddProductModalComponent {
     discount: ['', Validators.max(100)],
   });
 
-  discountType = signal<string>('None');
-  category = signal<string>('None');
+  discountType = signal<string>('');
+  category = signal<string>('');
   images = signal<string[]>([]);
 
   hasErrors(fieldName: string, errorType: string): boolean {
@@ -93,18 +93,13 @@ export class AddProductModalComponent {
         'warning'
       );
       return;
-    } else if (this.discountType() && !formValues.discount) {
+    } else if (this.discountType() && !Number(formValues.discount)) {
       this.notificationDirective()?.createNotification(
         'Product with a discount type must have a discount greater than 0.',
         'warning'
       );
       return;
     }
-
-    this.notificationDirective()?.createNotification(
-      'Product added successfully.',
-      'success'
-    );
 
     this.productService
       .create({
@@ -120,6 +115,10 @@ export class AddProductModalComponent {
       .subscribe({
         next: (newProduct) => {
           this.productAddedEvent.emit(newProduct);
+          this.notificationDirective()?.createNotification(
+            'Product added successfully.',
+            'success'
+          );
           this.closeBtn()?.nativeElement.click();
         },
         error: () =>

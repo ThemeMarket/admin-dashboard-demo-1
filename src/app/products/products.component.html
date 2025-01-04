@@ -184,6 +184,7 @@
             </td>
             <td class="px-4 py-2 font-medium text-gray-900 flex gap-2">
               <button
+                (click)="editProductModal.setProduct(product)"
                 data-modal-toggle="editProductModal"
                 data-modal-target="editProductModal"
                 class="text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:ring-primary-300 font-medium rounded-md text-sm px-4 py-2 focus:outline-none inline-flex items-center gap-2 justify-center"
@@ -248,7 +249,10 @@
       (productDeletedEvent)="deleteProduct($event)"
     />
     <!-- Edit Product Modal -->
-    <tm-edit-product-modal />
+    <tm-edit-product-modal
+      #editProductModal
+      (productUpdatedEvent)="updateProduct($event)"
+    />
     <!-- Products Navigation -->
     <nav
       class="flex flex-col items-start justify-between p-4 space-y-3 md:flex-row md:items-center md:space-y-0"

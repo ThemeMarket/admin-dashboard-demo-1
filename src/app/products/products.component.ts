@@ -60,4 +60,11 @@ export class ProductsComponent implements OnInit {
   deleteProduct(target: Product) {
     this.products = this.products.filter((product) => product.id !== target.id);
   }
+
+  updateProduct(target: Product) {
+    const filteredProducts = this.products.filter(
+      (product) => product.id !== target.id
+    );
+    this.products = [target, ...filteredProducts];
+  }
 }

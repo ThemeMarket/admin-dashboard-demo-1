@@ -27,4 +27,11 @@ export class ProductService {
   delete(id: string): Observable<Product> {
     return this.http.delete<Product>(`${this.baseUrl}/${id}`);
   }
+
+  update(
+    id: string,
+    updateProductDto: Partial<CreateProductDto>
+  ): Observable<Product> {
+    return this.http.patch<Product>(`${this.baseUrl}/${id}`, updateProductDto);
+  }
 }

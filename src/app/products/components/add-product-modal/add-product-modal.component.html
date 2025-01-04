@@ -80,7 +80,7 @@
               </p>
               } @if (hasErrors('description', 'minlength')) {
               <p class="text-red-500 text-sm mt-0.5">
-                Product Description must have at least 25 characters.
+                Product Description must have at least 50 characters.
               </p>
               }
             </div>
@@ -278,7 +278,7 @@
                     alt="Product Image"
                   />
                   <button
-                    (click)="deleteImage(image)"
+                    (click)="$event.preventDefault(); deleteImage(image)"
                     class="text-red-500 hover:text-red-600 absolute top-2 right-2 grid place-content-center"
                   >
                     <svg
@@ -424,7 +424,6 @@
         >
           <button
             type="submit"
-            #addBtn
             class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-md text-sm px-5 py-2.5 text-center"
           >
             Add Product
