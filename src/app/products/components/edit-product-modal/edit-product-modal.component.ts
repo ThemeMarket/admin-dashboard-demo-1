@@ -9,13 +9,13 @@ import {
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ProductService } from '../../../core/services/product.service';
 import { ImageService } from '../../../core/services/image.service';
-import { NotificationDirective } from '../../../core/directives/notification.directive';
 import { Product } from '../../../shared/models/product';
 import { hasErrorForm } from '../../../shared/utils/has-error-form';
+import { ToastComponent } from '../../../shared/components/toast/toast.component';
 
 @Component({
   selector: 'tm-edit-product-modal',
-  imports: [ReactiveFormsModule, NotificationDirective],
+  imports: [ReactiveFormsModule, ToastComponent],
   templateUrl: './edit-product-modal.component.html',
   styleUrls: ['../../../shared/styles/forms.css'],
 })
@@ -23,13 +23,12 @@ export class EditProductModalComponent {
   private readonly productService = inject(ProductService);
   private readonly formBuilder = inject(FormBuilder);
   private readonly imageService = inject(ImageService);
-  private readonly notificationDirective = viewChild<NotificationDirective>(
-    'notificationDirective'
-  );
   private readonly closeBtn =
-    viewChild<ElementRef<HTMLButtonElement>>('closeBtn');
+    viewChild.required<ElementRef<HTMLButtonElement>>('closeBtn');
+  private readonly toastComponent =
+    viewChild.required<ToastComponent>('editModalToast');
 
-  product?: Product;
+  protected product?: Product;
   productUpdatedEvent = output<Product>();
 
   form = this.formBuilder.group({
@@ -75,10 +74,10 @@ export class EditProductModalComponent {
       const file = files[0];
 
       if (!file.type.startsWith('image')) {
-        this.notificationDirective()?.createNotification(
-          'The selected file is not a valid image.',
-          'warning'
-        );
+        this.toastComponent().open({
+          message: 'The selected file is not a valid image.',
+          type: 'warning',
+        });
         return;
       }
 
@@ -98,16 +97,17 @@ export class EditProductModalComponent {
     const formValues = this.form.value;
 
     if (this.images().length === 0) {
-      this.notificationDirective()?.createNotification(
-        'An image is required for this product.',
-        'warning'
-      );
+      this.toastComponent().open({
+        message: 'An image is required for this product.',
+        type: 'warning',
+      });
       return;
     } else if (this.discountType() && !Number(formValues.discount)) {
-      this.notificationDirective()?.createNotification(
-        'Product with a discount type must have a discount greater than 0.',
-        'warning'
-      );
+      this.toastComponent().open({
+        message:
+          'Product with a discount type must have a discount greater than 0.',
+        type: 'warning',
+      });
       return;
     }
 
@@ -126,17 +126,17 @@ export class EditProductModalComponent {
         .subscribe({
           next: (updatedProduct) => {
             this.productUpdatedEvent.emit(updatedProduct);
-            this.notificationDirective()?.createNotification(
-              'Product updated successfully.',
-              'success'
-            );
-            this.closeBtn()?.nativeElement.click();
+            this.closeBtn().nativeElement.click();
+            this.toastComponent().open({
+              message: 'Product updated successfully.',
+              type: 'success',
+            });
           },
           error: () =>
-            this.notificationDirective()?.createNotification(
-              'A server error has occurred',
-              'error'
-            ),
+            this.toastComponent().open({
+              message: 'A server error has occurred',
+              type: 'error',
+            }),
         });
     }
   }

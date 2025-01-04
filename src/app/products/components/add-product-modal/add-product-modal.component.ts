@@ -11,11 +11,11 @@ import { hasErrorForm } from '../../../shared/utils/has-error-form';
 import { ImageService } from '../../../core/services/image.service';
 import { ProductService } from '../../../core/services/product.service';
 import { Product } from '../../../shared/models/product';
-import { NotificationDirective } from '../../../core/directives/notification.directive';
+import { ToastComponent } from '../../../shared/components/toast/toast.component';
 
 @Component({
   selector: 'tm-add-product-modal',
-  imports: [ReactiveFormsModule, NotificationDirective],
+  imports: [ReactiveFormsModule, ToastComponent],
   templateUrl: './add-product-modal.component.html',
   styleUrls: ['../../../shared/styles/forms.css'],
 })
@@ -23,11 +23,11 @@ export class AddProductModalComponent {
   private readonly formBuilder = inject(FormBuilder);
   private readonly imageService = inject(ImageService);
   private readonly productService = inject(ProductService);
-  private readonly notificationDirective = viewChild<NotificationDirective>(
-    'notificationDirective'
-  );
   private readonly closeBtn =
     viewChild<ElementRef<HTMLButtonElement>>('closeBtn');
+  private readonly toastComponent = viewChild.required<ToastComponent>(
+    'addProductModalToast'
+  );
 
   productAddedEvent = output<Product>();
 
@@ -58,10 +58,10 @@ export class AddProductModalComponent {
       const file = files[0];
 
       if (!file.type.startsWith('image')) {
-        this.notificationDirective()?.createNotification(
-          'The selected file is not a valid image.',
-          'warning'
-        );
+        this.toastComponent().open({
+          message: 'The selected file is not a valid image.',
+          type: 'warning',
+        });
         return;
       }
 
@@ -88,16 +88,17 @@ export class AddProductModalComponent {
     const formValues = this.form.value;
 
     if (this.images().length === 0) {
-      this.notificationDirective()?.createNotification(
-        'An image is required for this product.',
-        'warning'
-      );
+      this.toastComponent().open({
+        message: 'An image is required for this product.',
+        type: 'warning',
+      });
       return;
     } else if (this.discountType() && !Number(formValues.discount)) {
-      this.notificationDirective()?.createNotification(
-        'Product with a discount type must have a discount greater than 0.',
-        'warning'
-      );
+      this.toastComponent().open({
+        message:
+          'Product with a discount type must have a discount greater than 0.',
+        type: 'warning',
+      });
       return;
     }
 
@@ -115,17 +116,17 @@ export class AddProductModalComponent {
       .subscribe({
         next: (newProduct) => {
           this.productAddedEvent.emit(newProduct);
-          this.notificationDirective()?.createNotification(
-            'Product added successfully.',
-            'success'
-          );
+          this.toastComponent().open({
+            message: 'Product added successfully.',
+            type: 'success',
+          });
           this.closeBtn()?.nativeElement.click();
         },
         error: () =>
-          this.notificationDirective()?.createNotification(
-            'A server error has occurred',
-            'error'
-          ),
+          this.toastComponent().open({
+            message: 'A server error has occurred',
+            type: 'error',
+          }),
       });
   }
 }

@@ -4,7 +4,6 @@ import {
   effect,
   inject,
   input,
-  OnInit,
   viewChild,
 } from '@angular/core';
 import { initFlowbite } from 'flowbite';
@@ -16,8 +15,8 @@ import { EditProductModalComponent } from './components/edit-product-modal/edit-
 import { ProductService } from '../core/services/product.service';
 import { Product } from '../shared/models/product';
 import { CurrencyPipe, NgOptimizedImage, PercentPipe } from '@angular/common';
-import { NotificationDirective } from '../core/directives/notification.directive';
 import { Router } from '@angular/router';
+import { ToastComponent } from '../shared/components/toast/toast.component';
 
 @Component({
   selector: 'tm-products',
@@ -30,16 +29,15 @@ import { Router } from '@angular/router';
     NgOptimizedImage,
     CurrencyPipe,
     PercentPipe,
-    NotificationDirective,
+    ToastComponent,
   ],
   templateUrl: './products.component.html',
 })
 export class ProductsComponent {
-  productService = inject(ProductService);
-  router = inject(Router);
-  notificationDirective = viewChild<NotificationDirective>(
-    'notificationDirective'
-  );
+  private readonly productService = inject(ProductService);
+  private readonly router = inject(Router);
+  private readonly toastComponent = viewChild.required<ToastComponent>('toast');
+
   products: Product[] = [];
   totalProducts = 0;
   showingProducts = '';
@@ -67,10 +65,10 @@ export class ProductsComponent {
             }, 100);
           },
           error: () =>
-            this.notificationDirective()?.createNotification(
-              'Error fetching products...',
-              'error'
-            ),
+            this.toastComponent().open({
+              message: 'Error fetching products...',
+              type: 'error',
+            }),
         });
     });
   }

@@ -1,20 +1,46 @@
-import { Component, ElementRef, input, viewChild } from '@angular/core';
+import { Component, signal } from '@angular/core';
+import { ToastData } from './toast.interface';
+import {
+  animate,
+  state,
+  style,
+  transition,
+  trigger,
+} from '@angular/animations';
 
 @Component({
   selector: 'tm-toast',
   imports: [],
   templateUrl: './toast.component.html',
+  animations: [
+    trigger('slideInOut', [
+      state(
+        'slideIn',
+        style({
+          right: '32px',
+          opacity: 1,
+        })
+      ),
+      state(
+        'slideOut',
+        style({
+          visibility: 'hidden',
+          right: '-100%',
+        })
+      ),
+      transition('slideIn <=> slideOut', [animate('0.5s ease-in-out')]),
+    ]),
+  ],
 })
 export class ToastComponent {
-  message = input.required<string>();
-  type = input.required<'success' | 'error' | 'warning'>();
+  protected data = signal<ToastData>({
+    message: 'Default message',
+    type: 'success',
+    show: false,
+  });
 
-  private readonly toastEl =
-    viewChild.required<ElementRef<HTMLDivElement>>('toastEl');
-
-  show() {
-    this.toastEl().nativeElement.classList.add('opacity-100');
-    this.toastEl().nativeElement.classList.remove('opacity-0');
+  open(toastData: ToastData) {
+    this.data.set({ ...toastData, show: true });
 
     setTimeout(() => {
       this.hide();
@@ -22,7 +48,6 @@ export class ToastComponent {
   }
 
   hide() {
-    this.toastEl().nativeElement.classList.remove('opacity-100');
-    this.toastEl().nativeElement.classList.add('opacity-0');
+    this.data.update((value) => ({ ...value, show: false }));
   }
 }
