@@ -3,7 +3,6 @@ import { CreateProductDto } from '../dto/create-product';
 import { HttpClient } from '@angular/common/http';
 import { map, Observable } from 'rxjs';
 import { Product } from '../../shared/models/product';
-import { PaginationDto } from '../dto/pagination';
 
 @Injectable({
   providedIn: 'root',
@@ -19,34 +18,10 @@ export class ProductService {
     return this.http.post<Product>(this.baseUrl, product);
   }
 
-  getAll(paginationDto: PaginationDto): Observable<{
-    products: Product[];
-    total: number;
-    showing: string;
-  }> {
+  getAll(): Observable<Product[]> {
     return this.http
       .get<Product[] | null>(this.baseUrl)
-      .pipe(map((products) => (products ? products : [])))
-      .pipe(
-        map((products) => {
-          const { page, limit } = paginationDto;
-          const startIndex = (page - 1) * limit;
-          const pageProducts = [];
-
-          for (let i = 0; i < 6; i++) {
-            const product = products[startIndex + i];
-            if (product) pageProducts.push(product);
-          }
-
-          return {
-            products: pageProducts,
-            total: products.length,
-            showing: `${startIndex + 1}-${
-              page * limit > products.length ? products.length : page * limit
-            }`,
-          };
-        })
-      );
+      .pipe(map((products) => (products ? products : [])));
   }
 
   delete(id: string): Observable<Product> {

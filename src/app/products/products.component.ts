@@ -4,6 +4,8 @@ import {
   effect,
   inject,
   input,
+  OnInit,
+  signal,
   viewChild,
 } from '@angular/core';
 import { initFlowbite } from 'flowbite';
@@ -17,6 +19,7 @@ import { Product } from '../shared/models/product';
 import { CurrencyPipe, NgOptimizedImage, PercentPipe } from '@angular/common';
 import { Router } from '@angular/router';
 import { ToastComponent } from '../shared/components/toast/toast.component';
+import { ProductPaginationService } from '../core/services/product-pagination.service';
 
 @Component({
   selector: 'tm-products',
@@ -33,48 +36,65 @@ import { ToastComponent } from '../shared/components/toast/toast.component';
   ],
   templateUrl: './products.component.html',
 })
-export class ProductsComponent {
+export class ProductsComponent implements OnInit {
   private readonly productService = inject(ProductService);
+  private readonly productPaginationService = inject(ProductPaginationService);
   private readonly router = inject(Router);
   private readonly toastComponent = viewChild.required<ToastComponent>('toast');
 
-  products: Product[] = [];
-  totalProducts = 0;
-  showingProducts = '';
+  private totalProducts = signal<Product[]>([]);
+  protected products: Product[] = [];
+  protected total = signal<number>(0);
+  protected showingProducts = signal<string>('');
 
   /* Query Params */
-  page = input<string>();
+  protected page = input<string>();
 
-  selectedPage = computed(() => Number(this.page()) || 1);
+  protected selectedPage = computed(() => Number(this.page()) || 1);
 
   constructor() {
     effect(() => {
-      this.productService
-        .getAll({
-          page: this.selectedPage(),
-          limit: 6,
-        })
-        .subscribe({
-          next: ({ products, total, showing }) => {
-            this.products = products;
-            this.totalProducts = total;
-            this.showingProducts = showing;
+      const products = this.productPaginationService.paginate(
+        this.totalProducts(),
+        this.selectedPage()
+      );
 
-            setTimeout(() => {
-              initFlowbite();
-            }, 100);
-          },
-          error: () =>
-            this.toastComponent().open({
-              message: 'Error fetching products...',
-              type: 'error',
-            }),
+      if (products.length == 0) {
+        this.loadPage(this.selectedPage() - 1);
+      } else {
+        this.products = products;
+      }
+
+      const desiredFinalIndex = this.selectedPage() * 6;
+      const startIndex = desiredFinalIndex - 5;
+      const endIndex = Math.min(desiredFinalIndex, this.totalProducts().length);
+
+      this.showingProducts.set(`${startIndex}-${endIndex}`);
+      this.total.set(this.totalProducts().length);
+    });
+  }
+
+  ngOnInit(): void {
+    this.productService.getAll().subscribe({
+      next: (totalProducts) => {
+        this.totalProducts.set(totalProducts);
+
+        setTimeout(() => {
+          initFlowbite();
+        }, 100);
+      },
+      error: () => {
+        this.toastComponent().open({
+          message: 'Error fetching products...',
+          type: 'error',
         });
+      },
     });
   }
 
   addProduct(product: Product) {
-    this.products.push(product);
+    this.totalProducts.update((products) => [product, ...products]);
+
     /* Update modal events */
     setTimeout(() => {
       initFlowbite();
@@ -82,18 +102,20 @@ export class ProductsComponent {
   }
 
   deleteProduct(target: Product) {
-    this.products = this.products.filter((product) => product.id !== target.id);
+    this.totalProducts.update((products) =>
+      products.filter((product) => product.id !== target.id)
+    );
   }
 
   updateProduct(target: Product) {
-    const filteredProducts = this.products.filter(
-      (product) => product.id !== target.id
-    );
-    this.products = [target, ...filteredProducts];
+    this.totalProducts.update((products) => {
+      products = products.filter((product) => product.id !== target.id);
+      return [target, ...products];
+    });
   }
 
   loadPage(page: number) {
-    if (page < 1 || Math.ceil(this.totalProducts / 6) < page) return;
+    if (page < 1 || Math.ceil(this.total() / 6) < page) return;
 
     this.router.navigate(['/products'], {
       queryParams: {
