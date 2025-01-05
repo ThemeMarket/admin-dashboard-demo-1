@@ -163,9 +163,9 @@
             <td class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">
               <div class="flex items-center">
                 <div
-                  [class.bg-green-500]="product.stock > 85"
+                  [class.bg-green-500]="product.stock >= 85"
                   [class.bg-yellow-300]="
-                    product.stock > 65 && product.stock < 85
+                    product.stock >= 65 && product.stock < 85
                   "
                   [class.bg-red-500]="product.stock < 65"
                   class="inline-block w-4 h-4 mr-2 rounded-full"
