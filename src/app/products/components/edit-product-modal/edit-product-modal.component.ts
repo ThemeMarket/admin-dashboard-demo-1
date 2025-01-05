@@ -93,16 +93,17 @@ export class EditProductModalComponent {
 
   onSubmit() {
     if (!this.form.valid) return;
-
-    const formValues = this.form.value;
-
     if (this.images().length === 0) {
       this.toastComponent().open({
         message: 'An image is required for this product.',
         type: 'warning',
       });
       return;
-    } else if (this.discountType() && !Number(formValues.discount)) {
+    }
+
+    const formValues = this.form.value;
+
+    if (this.discountType() && !Number(formValues.discount)) {
       this.toastComponent().open({
         message:
           'Product with a discount type must have a discount greater than 0.',

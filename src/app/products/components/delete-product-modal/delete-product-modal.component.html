@@ -6,11 +6,11 @@
 >
   <div class="relative p-4 w-full max-w-md h-full md:h-auto">
     <!-- Modal content -->
-    <div class="relative p-4 text-center bg-white rounded-lg shadow sm:p-5">
+    <div class="relative p-4 text-center bg-white rounded-md shadow sm:p-5">
       <button
         #closeBtn
         type="button"
-        class="text-gray-400 absolute top-2.5 right-2.5 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center"
+        class="text-gray-400 absolute top-2.5 right-2.5 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-md text-sm p-1.5 ml-auto inline-flex items-center"
         data-modal-toggle="deleteProductModal"
         data-modal-target="deleteProductModal"
       >
@@ -49,14 +49,14 @@
         <button
           data-modal-toggle="deleteProductModal"
           type="button"
-          class="py-2 px-3 text-sm font-medium text-gray-500 bg-white rounded-lg border border-gray-200 hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-primary-300 hover:text-gray-900 focus:z-10"
+          class="py-2 px-3 text-sm font-medium text-gray-500 bg-white rounded-md border border-gray-200 hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-primary-300 hover:text-gray-900 focus:z-10"
         >
           No, cancel
         </button>
         <button
           type="submit"
           (click)="delete()"
-          class="py-2 px-3 text-sm font-medium text-center text-white bg-red-600 rounded-lg hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300"
+          class="py-2 px-3 text-sm font-medium text-center text-white bg-red-600 rounded-md hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300"
         >
           Yes, I'm sure
         </button>
