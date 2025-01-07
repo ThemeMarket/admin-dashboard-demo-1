@@ -7,7 +7,7 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "mock-api": "json-server --watch ./data/db.json --port 3000"
+    "mock-api": "json-server ./data/db.json --port 3000"
   },
   "private": true,
   "dependencies": {

@@ -1,10 +1,49 @@
-import { Component } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'tm-filter-dropdown',
   imports: [],
-  templateUrl: './filter-dropdown.component.html'
+  templateUrl: './filter-dropdown.component.html',
 })
-export class FilterDropdownComponent {
+export class FilterDropdownComponent implements OnInit {
+  router = inject(Router);
+  route = inject(ActivatedRoute);
 
+  fromPrice = signal<number>(0);
+  toPrice = signal<number>(5000);
+  category = signal<string>('');
+
+  ngOnInit(): void {
+    this.route.queryParamMap.subscribe((params) => {
+      this.category.set(params.get('category') ?? '');
+
+      const strFromPrice = params.get('fromPrice');
+      const fromPrice = strFromPrice ? Number(strFromPrice) : 0;
+      this.fromPrice.set(fromPrice);
+
+      const strToPrice = params.get('toPrice');
+      const toPrice = strToPrice ? Number(strToPrice) : 5000;
+      this.toPrice.set(toPrice);
+    });
+  }
+
+  save() {
+    this.router.navigate(['/products'], {
+      queryParams: {
+        fromPrice: this.fromPrice(),
+        toPrice: this.toPrice(),
+        category: this.category(),
+      },
+      queryParamsHandling: 'merge',
+    });
+  }
+
+  reset() {
+    this.fromPrice.set(0);
+    this.toPrice.set(5000);
+    this.category.set('');
+
+    this.save();
+  }
 }

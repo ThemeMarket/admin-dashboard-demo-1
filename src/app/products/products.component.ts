@@ -20,6 +20,7 @@ import { CurrencyPipe, NgOptimizedImage, PercentPipe } from '@angular/common';
 import { Router } from '@angular/router';
 import { ToastComponent } from '../shared/components/toast/toast.component';
 import { ProductPaginationService } from '../core/services/product-pagination.service';
+import { ProductFilterService } from '../core/services/product-filter.service';
 
 @Component({
   selector: 'tm-products',
@@ -39,6 +40,7 @@ import { ProductPaginationService } from '../core/services/product-pagination.se
 export class ProductsComponent implements OnInit {
   private readonly productService = inject(ProductService);
   private readonly productPaginationService = inject(ProductPaginationService);
+  private readonly productFilterService = inject(ProductFilterService);
   private readonly router = inject(Router);
   private readonly toastComponent = viewChild.required<ToastComponent>('toast');
 
@@ -49,13 +51,32 @@ export class ProductsComponent implements OnInit {
 
   /* Query Params */
   protected page = input<string>();
+  protected searchTerm = input<string>();
+  protected sortBy = input<string>();
+  /* Filters */
+  protected category = input<string>();
+  protected fromPrice = input<string>();
+  protected toPrice = input<string>();
 
   protected selectedPage = computed(() => Number(this.page()) || 1);
+  protected selectedFromPrice = computed(() => Number(this.fromPrice()) || 0);
+  protected selectedToPrice = computed(() =>
+    this.toPrice() ? Number(this.toPrice()) : 5000
+  );
 
   constructor() {
     effect(() => {
-      const products = this.productPaginationService.paginate(
+      const filteredProducts = this.productFilterService.filter(
         this.totalProducts(),
+        {
+          category: this.category(),
+          fromPrice: this.selectedFromPrice(),
+          toPrice: this.selectedToPrice(),
+        }
+      );
+
+      const products = this.productPaginationService.paginate(
+        filteredProducts,
         this.selectedPage()
       );
 
@@ -66,11 +87,14 @@ export class ProductsComponent implements OnInit {
       }
 
       const desiredFinalIndex = this.selectedPage() * 6;
-      const startIndex = desiredFinalIndex - 5;
-      const endIndex = Math.min(desiredFinalIndex, this.totalProducts().length);
+      const startIndex = Math.min(
+        desiredFinalIndex - 5,
+        filteredProducts.length
+      );
+      const endIndex = Math.min(desiredFinalIndex, filteredProducts.length);
 
       this.showingProducts.set(`${startIndex}-${endIndex}`);
-      this.total.set(this.totalProducts().length);
+      this.total.set(filteredProducts.length);
     });
   }
 
