@@ -23,6 +23,7 @@
         <input
           type="text"
           #inputSearch
+          [value]="searchTerm() ?? ''"
           (input)="search(inputSearch.value)"
           class="bg-gray-50 border border-gray-100 text-gray-900 text-sm rounded-md focus:ring-primary-500 focus:border-primary-500 block w-full pl-10 p-2.5"
           placeholder="Search"

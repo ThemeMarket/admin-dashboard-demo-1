@@ -93,7 +93,7 @@ export class ProductsComponent implements OnInit {
         this.selectedPage()
       );
 
-      if (products.length == 0) {
+      if (products.length === 0 && filteredProducts.length !== 0) {
         this.loadPage(this.selectedPage() - 1);
       } else {
         this.products = products;
@@ -169,5 +169,10 @@ export class ProductsComponent implements OnInit {
         searchTerm,
       },
     });
+
+    /* Update modal events */
+    setTimeout(() => {
+      initFlowbite();
+    }, 100);
   }
 }
