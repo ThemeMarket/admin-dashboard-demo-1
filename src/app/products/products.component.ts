@@ -77,6 +77,7 @@ export class ProductsComponent implements OnInit {
           category: this.category(),
           fromPrice: this.selectedFromPrice(),
           toPrice: this.selectedToPrice(),
+          searchTerm: this.searchTerm(),
         }
       );
 
@@ -158,6 +159,15 @@ export class ProductsComponent implements OnInit {
         page,
       },
       queryParamsHandling: 'merge',
+    });
+  }
+
+  search(searchTerm: string) {
+    this.router.navigate(['/products'], {
+      queryParamsHandling: 'merge',
+      queryParams: {
+        searchTerm,
+      },
     });
   }
 }

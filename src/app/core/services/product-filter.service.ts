@@ -5,6 +5,7 @@ export interface Filters {
   fromPrice?: number;
   toPrice?: number;
   category?: string;
+  searchTerm?: string;
 }
 
 @Injectable({
@@ -12,14 +13,20 @@ export interface Filters {
 })
 export class ProductFilterService {
   filter(products: Product[], filters: Filters): Product[] {
-    const { category = '', fromPrice = 0, toPrice = 5000 } = filters;
+    const { category, fromPrice, toPrice, searchTerm } = filters;
 
     return products.filter((product) => {
       let matched = true;
 
-      if (!product.category?.includes(category)) matched = false;
-      if (fromPrice > product.price) matched = false;
-      if (toPrice < product.price) matched = false;
+      if (category && product.category?.includes(category)) matched = false;
+      if (fromPrice && fromPrice > product.price) matched = false;
+      if (toPrice && toPrice < product.price) matched = false;
+      if (
+        searchTerm &&
+        !product.name.toLowerCase().includes(searchTerm.toLowerCase())
+      ) {
+        matched = false;
+      }
 
       return matched;
     });
