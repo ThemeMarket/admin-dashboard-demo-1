@@ -9,6 +9,8 @@
   >
     <li>
       <a
+        role="button"
+        (click)="sort('Name (A-Z)')"
         class="group inline-flex w-full items-center rounded-md px-3 py-2 text-sm text-gray-500 hover:bg-gray-100 hover:text-gray-900"
       >
         Name (A-Z)
@@ -16,6 +18,8 @@
     </li>
     <li>
       <a
+        role="button"
+        (click)="sort('Name (Z-A)')"
         class="group inline-flex w-full items-center rounded-md px-3 py-2 text-sm text-gray-500 hover:bg-gray-100 hover:text-gray-900"
       >
         Name (Z-A)
@@ -23,6 +27,8 @@
     </li>
     <li>
       <a
+        role="button"
+        (click)="sort('Price (Low to High)')"
         class="group inline-flex w-full items-center rounded-md px-3 py-2 text-sm text-gray-500 hover:bg-gray-100 hover:text-gray-900"
       >
         Price (Low to High)
@@ -30,6 +36,8 @@
     </li>
     <li>
       <a
+        role="button"
+        (click)="sort('Price (High to Low)')"
         class="group inline-flex w-full items-center rounded-md px-3 py-2 text-sm text-gray-500 hover:bg-gray-100 hover:text-gray-900"
       >
         Price (High to Low)

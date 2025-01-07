@@ -21,6 +21,10 @@ import { Router } from '@angular/router';
 import { ToastComponent } from '../shared/components/toast/toast.component';
 import { ProductPaginationService } from '../core/services/product-pagination.service';
 import { ProductFilterService } from '../core/services/product-filter.service';
+import {
+  ProductSortService,
+  SortStrategyName,
+} from '../core/services/product-sort.service';
 
 @Component({
   selector: 'tm-products',
@@ -41,6 +45,7 @@ export class ProductsComponent implements OnInit {
   private readonly productService = inject(ProductService);
   private readonly productPaginationService = inject(ProductPaginationService);
   private readonly productFilterService = inject(ProductFilterService);
+  private readonly productSortService = inject(ProductSortService);
   private readonly router = inject(Router);
   private readonly toastComponent = viewChild.required<ToastComponent>('toast');
 
@@ -75,8 +80,15 @@ export class ProductsComponent implements OnInit {
         }
       );
 
-      const products = this.productPaginationService.paginate(
+      const sortedProducts = this.productSortService.sort(
         filteredProducts,
+        this.sortBy()
+          ? (this.sortBy() as SortStrategyName)
+          : SortStrategyName.NAME_ASC
+      );
+
+      const products = this.productPaginationService.paginate(
+        sortedProducts,
         this.selectedPage()
       );
 

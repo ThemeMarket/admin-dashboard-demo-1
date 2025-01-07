@@ -7,12 +7,12 @@ import { ActivatedRoute, Router } from '@angular/router';
   templateUrl: './filter-dropdown.component.html',
 })
 export class FilterDropdownComponent implements OnInit {
-  router = inject(Router);
-  route = inject(ActivatedRoute);
+  private readonly router = inject(Router);
+  private readonly route = inject(ActivatedRoute);
 
-  fromPrice = signal<number>(0);
-  toPrice = signal<number>(5000);
-  category = signal<string>('');
+  protected fromPrice = signal<number>(0);
+  protected toPrice = signal<number>(5000);
+  protected category = signal<string>('');
 
   ngOnInit(): void {
     this.route.queryParamMap.subscribe((params) => {
