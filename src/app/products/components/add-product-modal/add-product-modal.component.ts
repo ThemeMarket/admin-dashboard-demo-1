@@ -6,12 +6,13 @@ import {
   signal,
   viewChild,
 } from '@angular/core';
-import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { hasErrorForm } from '../../../shared/utils/has-error-form';
-import { ImageService } from '../../../core/services/image.service';
-import { ProductService } from '../../../core/services/product.service';
-import { Product } from '../../../shared/models/product';
-import { ToastComponent } from '../../../shared/components/toast/toast.component';
+import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { hasErrorForm } from '@/shared/utils/has-error-form';
+import { ImageService } from '@/core/services/image.service';
+import { ProductService } from '@/core/services/product.service';
+import { Product } from '@/shared/models/product';
+import { ToastComponent } from '@/shared/components/toast/toast.component';
+import { buildProductForm } from '@/shared/utils/build-product-form';
 
 @Component({
   selector: 'tm-add-product-modal',
@@ -29,22 +30,11 @@ export class AddProductModalComponent {
     'addProductModalToast'
   );
 
-  productAddedEvent = output<Product>();
-
-  form = this.formBuilder.group({
-    name: ['', Validators.required],
-    description: ['', [Validators.required, Validators.minLength(50)]],
-    price: ['', [Validators.required, Validators.min(1)]],
-    stock: [
-      '',
-      [Validators.required, Validators.min(1), Validators.pattern(/^\d+$/)],
-    ],
-    discount: ['', Validators.max(100)],
-  });
-
-  discountType = signal<string>('');
-  category = signal<string>('');
-  images = signal<string[]>([]);
+  protected productAddedEvent = output<Product>();
+  protected form = buildProductForm(this.formBuilder);
+  protected discountType = signal<string>('');
+  protected category = signal<string>('');
+  protected images = signal<string[]>([]);
 
   hasErrors(fieldName: string, errorType: string): boolean {
     return hasErrorForm(this.form, fieldName, errorType);

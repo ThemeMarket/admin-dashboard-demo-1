@@ -5,9 +5,9 @@ import {
   output,
   viewChild,
 } from '@angular/core';
-import { Product } from '../../../shared/models/product';
-import { ProductService } from '../../../core/services/product.service';
-import { ToastComponent } from '../../../shared/components/toast/toast.component';
+import { Product } from '@/shared/models/product';
+import { ProductService } from '@/core/services/product.service';
+import { ToastComponent } from '@/shared/components/toast/toast.component';
 
 @Component({
   selector: 'tm-delete-product-modal',
@@ -22,7 +22,7 @@ export class DeleteModalComponent {
     viewChild.required<ToastComponent>('deleteModalToast');
   private product?: Product;
 
-  productDeletedEvent = output<Product>();
+  protected productDeletedEvent = output<Product>();
 
   setProduct(product: Product) {
     this.product = product;
