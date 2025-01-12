@@ -25,6 +25,7 @@ import {
   ProductSortService,
   SortStrategyName,
 } from '../core/services/product-sort.service';
+import { ListLoadingComponent } from '../shared/components/list-loading/list-loading.component';
 
 @Component({
   selector: 'tm-products',
@@ -38,6 +39,7 @@ import {
     CurrencyPipe,
     PercentPipe,
     ToastComponent,
+    ListLoadingComponent,
   ],
   templateUrl: './products.component.html',
 })

@@ -109,6 +109,7 @@
     </div>
   </article>
   <article class="bg-white rounded-md border border-gray-200 p-4">
+    @defer {
     <div class="overflow-x-auto w-full">
       @if (products.length > 0) {
       <table class="w-full text-sm text-left text-gray-500">
@@ -226,6 +227,9 @@
       </div>
       }
     </div>
+    }@placeholder(minimum 200ms) {
+    <tm-list-loading />
+    }
     <!-- Delete Product Modal -->
     <tm-delete-product-modal
       #deleteProductModal
