@@ -100,6 +100,7 @@ export class ProductsComponent implements OnInit {
       }
 
       this.updateShowingProductsInformation(filteredProducts);
+      this.loadFlowbiteComponents();
     });
   }
 
