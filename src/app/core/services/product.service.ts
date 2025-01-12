@@ -1,8 +1,8 @@
 import { inject, Injectable } from '@angular/core';
-import { CreateProductDto } from '../dto/create-product';
+import { CreateProductDto } from '@/core/dto/create-product';
 import { HttpClient } from '@angular/common/http';
 import { map, Observable } from 'rxjs';
-import { Product } from '../../shared/models/product';
+import { Product } from '@/shared/models/product';
 
 @Injectable({
   providedIn: 'root',

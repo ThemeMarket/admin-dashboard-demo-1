@@ -14,18 +14,18 @@ import { FilterDropdownComponent } from './components/filter-dropdown/filter-dro
 import { SortDropdownComponent } from './components/sort-dropdown/sort-dropdown.component';
 import { DeleteModalComponent } from './components/delete-product-modal/delete-product-modal.component';
 import { EditProductModalComponent } from './components/edit-product-modal/edit-product-modal.component';
-import { ProductService } from '../core/services/product.service';
-import { Product } from '../shared/models/product';
+import { ProductService } from '@/core/services/product.service';
+import { Product } from '@/shared/models/product';
 import { CurrencyPipe, NgOptimizedImage, PercentPipe } from '@angular/common';
 import { Router } from '@angular/router';
-import { ToastComponent } from '../shared/components/toast/toast.component';
-import { ProductPaginationService } from '../core/services/product-pagination.service';
-import { ProductFilterService } from '../core/services/product-filter.service';
+import { ToastComponent } from '@/shared/components/toast/toast.component';
+import { ProductPaginationService } from '@/core/services/product-pagination.service';
+import { ProductFilterService } from '@/core/services/product-filter.service';
 import {
   ProductSortService,
   SortStrategyName,
-} from '../core/services/product-sort.service';
-import { ListLoadingComponent } from '../shared/components/list-loading/list-loading.component';
+} from '@/core/services/product-sort.service';
+import { ListLoadingComponent } from '@/shared/components/list-loading/list-loading.component';
 
 @Component({
   selector: 'tm-products',

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Product } from '../../shared/models/product';
+import { Product } from '@/shared/models/product';
 
 export interface Filters {
   fromPrice?: number;
