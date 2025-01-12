@@ -57,7 +57,7 @@ export class ProductsComponent implements OnInit {
   /* Query Params */
   protected page = input<string>();
   protected searchTerm = input<string>();
-  protected sortBy = input<string>();
+  protected sortBy = input<SortStrategyName>();
   /* Filters */
   protected category = input<string>();
   protected fromPrice = input<string>();
@@ -83,9 +83,7 @@ export class ProductsComponent implements OnInit {
 
       const sortedProducts = this.productSortService.sort(
         filteredProducts,
-        this.sortBy()
-          ? (this.sortBy() as SortStrategyName)
-          : SortStrategyName.NAME_ASC
+        this.sortBy() ?? SortStrategyName.NAME_ASC
       );
 
       const products = this.productPaginationService.paginate(
@@ -99,15 +97,7 @@ export class ProductsComponent implements OnInit {
         this.products = products;
       }
 
-      const desiredFinalIndex = this.selectedPage() * 6;
-      const startIndex = Math.min(
-        desiredFinalIndex - 5,
-        filteredProducts.length
-      );
-      const endIndex = Math.min(desiredFinalIndex, filteredProducts.length);
-
-      this.showingProducts.set(`${startIndex}-${endIndex}`);
-      this.total.set(filteredProducts.length);
+      this.updateShowingProductsInformation(filteredProducts);
     });
   }
 
@@ -115,10 +105,7 @@ export class ProductsComponent implements OnInit {
     this.productService.getAll().subscribe({
       next: (totalProducts) => {
         this.totalProducts.set(totalProducts);
-
-        setTimeout(() => {
-          initFlowbite();
-        }, 100);
+        this.loadFlowbiteComponents();
       },
       error: () => {
         this.toastComponent().open({
@@ -131,17 +118,14 @@ export class ProductsComponent implements OnInit {
 
   addProduct(product: Product) {
     this.totalProducts.update((products) => [product, ...products]);
-
-    /* Update modal events */
-    setTimeout(() => {
-      initFlowbite();
-    }, 100);
+    this.loadFlowbiteComponents();
   }
 
   deleteProduct(target: Product) {
     this.totalProducts.update((products) =>
       products.filter((product) => product.id !== target.id)
     );
+    this.loadFlowbiteComponents();
   }
 
   updateProduct(target: Product) {
@@ -149,6 +133,7 @@ export class ProductsComponent implements OnInit {
       products = products.filter((product) => product.id !== target.id);
       return [target, ...products];
     });
+    this.loadFlowbiteComponents();
   }
 
   loadPage(page: number) {
@@ -170,9 +155,22 @@ export class ProductsComponent implements OnInit {
       },
     });
 
-    /* Update modal events */
-    setTimeout(() => {
+    this.loadFlowbiteComponents();
+  }
+
+  private loadFlowbiteComponents() {
+    const timeoutId = setTimeout(() => {
       initFlowbite();
+      clearTimeout(timeoutId);
     }, 100);
+  }
+
+  private updateShowingProductsInformation(products: Product[]) {
+    const desiredFinalIndex = this.selectedPage() * 6;
+    const start = Math.min(desiredFinalIndex - 5, products.length);
+    const end = Math.min(desiredFinalIndex, products.length);
+
+    this.showingProducts.set(`${start}-${end}`);
+    this.total.set(products.length);
   }
 }
