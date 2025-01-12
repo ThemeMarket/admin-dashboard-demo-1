@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
 @Component({
-  selector: 'tm-signup',
+  selector: 'tm-reset-password',
   imports: [RouterLink],
-  templateUrl: './signup.component.html',
+  templateUrl: './reset-password.component.html',
 })
-export class SignupComponent {}
+export class ResetPasswordComponent {}
