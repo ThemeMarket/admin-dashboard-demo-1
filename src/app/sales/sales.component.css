@@ -1,0 +1,7 @@
+.tab-inactive {
+  @apply inline-block p-4 border-b-2 border-transparent rounded-t-md hover:text-gray-600 hover:border-gray-300;
+}
+
+.tab-active {
+  @apply inline-block p-4 text-primary-600 border-b-2 border-primary-600 rounded-t-lg hover:border-b-primary-600 hover:text-primary-600;
+}
