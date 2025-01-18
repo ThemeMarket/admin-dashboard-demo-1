@@ -19,13 +19,14 @@ import { Product } from '@/shared/models/product';
 import { CurrencyPipe, NgOptimizedImage, PercentPipe } from '@angular/common';
 import { Router } from '@angular/router';
 import { ToastComponent } from '@/shared/components/toast/toast.component';
-import { ProductPaginationService } from '@/core/services/product-pagination.service';
+import { PaginationService } from '@/core/services/pagination.service';
 import { ProductFilterService } from '@/core/services/product-filter.service';
 import {
   ProductSortService,
   SortStrategyName,
 } from '@/core/services/product-sort.service';
 import { ListLoadingComponent } from '@/shared/components/list-loading/list-loading.component';
+import { getShowingInformation } from '@/shared/utils/get-showing-information';
 
 @Component({
   selector: 'tm-products',
@@ -45,7 +46,7 @@ import { ListLoadingComponent } from '@/shared/components/list-loading/list-load
 })
 export class ProductsComponent implements OnInit {
   private readonly productService = inject(ProductService);
-  private readonly productPaginationService = inject(ProductPaginationService);
+  private readonly paginationService = inject(PaginationService);
   private readonly productFilterService = inject(ProductFilterService);
   private readonly productSortService = inject(ProductSortService);
   private readonly router = inject(Router);
@@ -88,7 +89,7 @@ export class ProductsComponent implements OnInit {
         this.sortBy() ?? SortStrategyName.NAME_ASC
       );
 
-      const products = this.productPaginationService.paginate(
+      const products = this.paginationService.paginate(
         sortedProducts,
         this.selectedPage()
       );
@@ -168,11 +169,8 @@ export class ProductsComponent implements OnInit {
   }
 
   private updateShowingProductsInformation(products: Product[]) {
-    const desiredFinalIndex = this.selectedPage() * 6;
-    const start = Math.min(desiredFinalIndex - 5, products.length);
-    const end = Math.min(desiredFinalIndex, products.length);
-
-    this.showingProducts.set(`${start}-${end}`);
-    this.total.set(products.length);
+    const info = getShowingInformation(products, this.selectedPage());
+    this.showingProducts.set(info.showing);
+    this.total.set(info.total);
   }
 }
