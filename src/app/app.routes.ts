@@ -1,8 +1,5 @@
 import { Routes } from '@angular/router';
 import { OverviewComponent } from './overview/overview.component';
-import { ProductsComponent } from './products/products.component';
-import { OrdersComponent } from './orders/orders.component';
-import { LoginComponent } from './auth/login/login.component';
 import { SignupComponent } from './auth/signup/signup.component';
 import { ForgotPasswordComponent } from './auth/forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from './auth/reset-password/reset-password.component';
@@ -14,26 +11,36 @@ export const routes: Routes = [
   },
   {
     path: 'products',
-    component: ProductsComponent,
+    loadComponent: () =>
+      import('./products/products.component').then((c) => c.ProductsComponent),
   },
   {
     path: 'orders',
-    component: OrdersComponent,
+    loadComponent: () =>
+      import('./orders/orders.component').then((c) => c.OrdersComponent),
   },
   {
     path: 'login',
-    component: LoginComponent,
+    loadComponent: () =>
+      import('./auth/login/login.component').then((c) => c.LoginComponent),
   },
   {
     path: 'signup',
-    component: SignupComponent,
+    loadComponent: () =>
+      import('./auth/signup/signup.component').then((c) => c.SignupComponent),
   },
   {
     path: 'forgot-password',
-    component: ForgotPasswordComponent,
+    loadComponent: () =>
+      import('./auth/forgot-password/forgot-password.component').then(
+        (c) => c.ForgotPasswordComponent
+      ),
   },
   {
     path: 'reset-password',
-    component: ResetPasswordComponent,
+    loadComponent: () =>
+      import('./auth/reset-password/reset-password.component').then(
+        (c) => c.ResetPasswordComponent
+      ),
   },
 ];

@@ -19,33 +19,22 @@ Plantilla de panel de administración de productos totalmente gratuita, desarrol
 
 ## Previews
 
-### Overview Page
+### Overview
 
 <div style="display: flex; justify-content: center;">
-    <img src="./public/img/previews/overview.png" style="max-width: 100%; height: auto; margin: 10px;">
+    <img src="./public/img/previews/overview.webp" style="max-width: 100%; height: auto; margin: 10px;">
 </div>
 
-### Products Page
+### Products
 
-<div style="display: flex; flex-wrap: wrap; justify-content: center;">
-    <img src="./public/img/previews/products.png" style="flex: 1 1 45%; max-width: 45%; margin: 10px;">
-    <img src="./public/img/previews/add-product-modal.png" style="flex: 1 1 45%; max-width: 45%; margin: 10px;">
-    <img src="./public/img/previews/edit-product-modal.png" style="flex: 1 1 45%; max-width: 45%; margin: 10px;">
+<div style="display: flex; justify-content: center;">
+    <img src="./public/img/previews/products.webp" style="max-width: 100%; height: auto; margin: 10px;">
 </div>
 
 ### Orders
 
 <div style="display: flex; justify-content: center;">
-    <img src="./public/img/previews/orders.png" style="max-width: 100%; height: auto; margin: 10px;">
-</div>
-
-### Auth
-
-<div style="display: flex; flex-wrap: wrap; justify-content: center;">
-    <img src="./public/img/previews/login.png" style="flex: 1 1 45%; max-width: 45%; margin: 10px;">
-    <img src="./public/img/previews/signup.png" style="flex: 1 1 45%; max-width: 45%; margin: 10px;">
-    <img src="./public/img/previews/reset-password.png" style="flex: 1 1 45%; max-width: 45%; margin: 10px;">
-    <img src="./public/img/previews/forgot-password.png" style="flex: 1 1 45%; max-width: 45%; margin: 10px;">
+    <img src="./public/img/previews/orders.webp" style="max-width: 100%; height: auto; margin: 10px;">
 </div>
 
 ## Instalación
