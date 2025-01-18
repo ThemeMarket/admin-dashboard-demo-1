@@ -107,24 +107,13 @@ export class OverviewComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.productService.getAll().subscribe((products) => {
-      const bestOffersProducts = products
-        .filter((product) => product.discount > 30 && product.stock > 0)
-        .map((product) => {
-          return {
-            product,
-            discountPrice:
-              product.price - (product.discount * product.price) / 100,
-          };
-        });
-
-      this.bestOffersProducts.set(bestOffersProducts);
-    });
+    this.productService
+      .getOffers()
+      .subscribe((offers) => this.bestOffersProducts.set(offers));
 
     this.orderService.getAll().subscribe((orders) => {
       /* Retrieve the last six orders */
       orders = orders.filter((_, index) => index >= orders.length - 6);
-
       this.orders.set(orders);
     });
   }

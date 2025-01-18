@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Product } from '@/shared/models/product';
 
-export enum SortStrategyName {
+export const enum SortStrategyName {
   NAME_ASC = 'Name (A-Z)',
   NAME_DESC = 'Name (Z-A)',
   PRICE_ASC = 'Price (Low to High)',

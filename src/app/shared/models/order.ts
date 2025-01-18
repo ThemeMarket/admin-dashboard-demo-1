@@ -1,10 +1,10 @@
-export enum PaymentMethod {
+export const enum PaymentMethod {
   CREDIT_CARD = 'Credit Card',
   PAYPAL = 'PayPal',
   BANK_TRANSFER = 'Bank Transfer',
 }
 
-export enum OrderStatus {
+export const enum OrderStatus {
   SHIPPED = 'Shipped',
   PROCESSING = 'Processing',
   DELIVERED = 'Delivered',

@@ -41,6 +41,7 @@
                   "maximumError": "8kB"
                 }
               ],
+              "allowedCommonJsDependencies": ["apexcharts"],
               "outputHashing": "all"
             },
             "development": {

@@ -27,6 +27,7 @@ import {
 } from '@/core/services/product-sort.service';
 import { ListLoadingComponent } from '@/shared/components/list-loading/list-loading.component';
 import { getShowingInformation } from '@/shared/utils/get-showing-information';
+import { loadFlowbiteComponents } from '@/shared/utils/load-flowbite-components';
 
 @Component({
   selector: 'tm-products',
@@ -104,7 +105,7 @@ export class ProductsComponent implements OnInit {
     this.productService.getAll().subscribe({
       next: (totalProducts) => {
         this.totalProducts.set(totalProducts);
-        this.loadFlowbiteComponents();
+        loadFlowbiteComponents();
       },
       error: () => {
         this.toastComponent().open({
@@ -117,14 +118,14 @@ export class ProductsComponent implements OnInit {
 
   addProduct(product: Product) {
     this.totalProducts.update((products) => [product, ...products]);
-    this.loadFlowbiteComponents();
+    loadFlowbiteComponents();
   }
 
   deleteProduct(target: Product) {
     this.totalProducts.update((products) =>
       products.filter((product) => product.id !== target.id)
     );
-    this.loadFlowbiteComponents();
+    loadFlowbiteComponents();
   }
 
   updateProduct(target: Product) {
@@ -132,7 +133,7 @@ export class ProductsComponent implements OnInit {
       products = products.filter((product) => product.id !== target.id);
       return [target, ...products];
     });
-    this.loadFlowbiteComponents();
+    loadFlowbiteComponents();
   }
 
   loadPage(page: number) {
@@ -154,14 +155,7 @@ export class ProductsComponent implements OnInit {
       },
     });
 
-    this.loadFlowbiteComponents();
-  }
-
-  private loadFlowbiteComponents() {
-    const timeoutId = setTimeout(() => {
-      initFlowbite();
-      clearTimeout(timeoutId);
-    }, 100);
+    loadFlowbiteComponents();
   }
 
   private updateShowingProductsInformation(products: Product[]) {
