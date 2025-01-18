@@ -17,10 +17,10 @@ import { Router, RouterLink } from '@angular/router';
 @Component({
   selector: 'tm-sales',
   imports: [ListLoadingComponent, CurrencyPipe, RouterLink, NgOptimizedImage],
-  templateUrl: './sales.component.html',
-  styleUrl: './sales.component.css',
+  templateUrl: './orders.component.html',
+  styleUrl: './orders.component.css',
 })
-export class SalesComponent {
+export class OrdersComponent {
   private readonly orderService = inject(OrderService);
   private readonly router = inject(Router);
   private readonly paginationService = inject(PaginationService);
@@ -60,7 +60,7 @@ export class SalesComponent {
   loadPage(page: number) {
     if (page < 1 || Math.ceil(this.totalOrders().length / 6) < page) return;
 
-    this.router.navigate(['/sales'], {
+    this.router.navigate(['/orders'], {
       queryParams: {
         page,
       },

@@ -12,7 +12,7 @@
             <a
               class="tab-inactive"
               [class.tab-active]="!orderStatus()"
-              routerLink="/sales"
+              routerLink="/orders"
               >All Orders</a
             >
           </li>
@@ -20,7 +20,7 @@
             <a
               class="tab-inactive"
               [class.tab-active]="orderStatus() === 'Shipped'"
-              routerLink="/sales"
+              routerLink="/orders"
               [queryParams]="{ orderStatus: 'Shipped' }"
               queryParamsHandling="merge"
               >Shipped</a
@@ -30,7 +30,7 @@
             <a
               class="tab-inactive"
               [class.tab-active]="orderStatus() === 'Processing'"
-              routerLink="/sales"
+              routerLink="/orders"
               [queryParams]="{ orderStatus: 'Processing' }"
               queryParamsHandling="merge"
               >Processing</a
@@ -40,7 +40,7 @@
             <a
               class="tab-inactive"
               [class.tab-active]="orderStatus() === 'Delivered'"
-              routerLink="/sales"
+              routerLink="/orders"
               [queryParams]="{ orderStatus: 'Delivered' }"
               queryParamsHandling="merge"
               >Delivered</a
@@ -50,7 +50,7 @@
             <a
               class="tab-inactive"
               [class.tab-active]="orderStatus() === 'Canceled'"
-              routerLink="/sales"
+              routerLink="/orders"
               [queryParams]="{ orderStatus: 'Canceled' }"
               queryParamsHandling="merge"
               >Canceled</a
