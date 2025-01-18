@@ -4,7 +4,7 @@
   >
     <div class="flex flex-col sm:flex-row gap-2">
       <div class="relative sm:w-96">
-        <div
+        <form
           class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none"
         >
           <svg
@@ -19,15 +19,23 @@
               d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
             ></path>
           </svg>
-        </div>
+        </form>
         <input
           type="text"
           #inputSearch
           [value]="searchTerm() ?? ''"
-          (input)="search(inputSearch.value)"
           class="bg-gray-50 border border-gray-100 text-gray-900 text-sm rounded-md focus:ring-primary-500 focus:border-primary-500 block w-full pl-10 p-2.5"
           placeholder="Search"
         />
+        <div class="absolute inset-y-0 right-1 p-1">
+          <button
+            [class.hidden]="inputSearch.value === searchTerm() ? true : false"
+            (click)="search(inputSearch.value)"
+            class="text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:ring-primary-300 font-medium rounded-md text-sm px-4 py-1.5 focus:outline-none"
+          >
+            Go
+          </button>
+        </div>
       </div>
     </div>
     <div class="flex flex-col sm:flex-row md:flex-col lg:flex-row gap-2">

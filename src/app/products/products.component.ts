@@ -101,7 +101,6 @@ export class ProductsComponent implements OnInit {
       }
 
       this.updateShowingProductsInformation(filteredProducts);
-      this.loadFlowbiteComponents();
     });
   }
 
@@ -109,6 +108,7 @@ export class ProductsComponent implements OnInit {
     this.productService.getAll().subscribe({
       next: (totalProducts) => {
         this.totalProducts.set(totalProducts);
+        this.loadFlowbiteComponents();
       },
       error: () => {
         this.toastComponent().open({
