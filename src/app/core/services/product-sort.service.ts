@@ -46,6 +46,13 @@ export class ProductSortService {
     },
   ];
 
+  /**
+   *
+   * @param products - Array of products to be sorted
+   * @param sortStrategyName - Name of the strategy which products will be sorted
+   * @returns An array of sorted products
+   * @throws An error if the given `sortStrategyName` is invalid
+   */
   sort(products: Product[], sortStrategyName: SortStrategyName) {
     const sortStrategy = this.sortStrategies.find(
       (sortStrategy) => sortStrategy.name === sortStrategyName

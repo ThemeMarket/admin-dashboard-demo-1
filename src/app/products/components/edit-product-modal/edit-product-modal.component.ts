@@ -6,7 +6,7 @@ import {
   signal,
   viewChild,
 } from '@angular/core';
-import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { ProductService } from '@/core/services/product.service';
 import { ImageService } from '@/core/services/image.service';
 import { Product } from '@/shared/models/product';
@@ -22,7 +22,6 @@ import { buildProductForm } from '@/shared/utils/build-product-form';
 })
 export class EditProductModalComponent {
   private readonly productService = inject(ProductService);
-  private readonly formBuilder = inject(FormBuilder);
   private readonly imageService = inject(ImageService);
   private readonly closeBtn =
     viewChild.required<ElementRef<HTMLButtonElement>>('closeBtn');
@@ -31,7 +30,9 @@ export class EditProductModalComponent {
 
   protected product?: Product;
   protected productUpdatedEvent = output<Product>();
-  protected form = buildProductForm(this.formBuilder);
+  protected form = buildProductForm();
+
+  /* Other form fields that can't be included in the form */
   protected discountType = signal<string>('');
   protected category = signal<string>('');
   protected images = signal<string[]>([]);

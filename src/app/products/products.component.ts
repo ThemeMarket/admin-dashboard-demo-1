@@ -66,6 +66,7 @@ export class ProductsComponent implements OnInit {
   protected fromPrice = input<string>();
   protected toPrice = input<string>();
 
+  /* Query Params mapped to usable values */
   protected selectedPage = computed(() => Number(this.page()) || 1);
   protected selectedFromPrice = computed(() => Number(this.fromPrice()) || 0);
   protected selectedToPrice = computed(() =>
@@ -94,12 +95,7 @@ export class ProductsComponent implements OnInit {
         this.selectedPage()
       );
 
-      if (products.length === 0 && filteredProducts.length !== 0) {
-        this.loadPage(this.selectedPage() - 1);
-      } else {
-        this.products = products;
-      }
-
+      this.products = products;
       this.updateShowingProductsInformation(filteredProducts);
     });
   }

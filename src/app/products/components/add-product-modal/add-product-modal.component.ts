@@ -6,7 +6,7 @@ import {
   signal,
   viewChild,
 } from '@angular/core';
-import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { hasErrorForm } from '@/shared/utils/has-error-form';
 import { ImageService } from '@/core/services/image.service';
 import { ProductService } from '@/core/services/product.service';
@@ -21,7 +21,6 @@ import { buildProductForm } from '@/shared/utils/build-product-form';
   styleUrls: ['../../../shared/styles/forms.css'],
 })
 export class AddProductModalComponent {
-  private readonly formBuilder = inject(FormBuilder);
   private readonly imageService = inject(ImageService);
   private readonly productService = inject(ProductService);
   private readonly closeBtn =
@@ -31,7 +30,9 @@ export class AddProductModalComponent {
   );
 
   protected productAddedEvent = output<Product>();
-  protected form = buildProductForm(this.formBuilder);
+  protected form = buildProductForm();
+
+  /* Other form fields that can't be included in the form */
   protected discountType = signal<string>('');
   protected category = signal<string>('');
   protected images = signal<string[]>([]);

@@ -48,6 +48,6 @@ export class ToastComponent {
   }
 
   hide() {
-    this.data.update((value) => ({ ...value, show: false }));
+    this.data.update((values) => ({ ...values, show: false }));
   }
 }

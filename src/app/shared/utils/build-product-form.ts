@@ -1,6 +1,7 @@
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 
-export function buildProductForm(formBuilder: FormBuilder) {
+export function buildProductForm() {
+  const formBuilder = new FormBuilder();
   const form = formBuilder.group({
     name: ['', Validators.required],
     description: ['', [Validators.required, Validators.minLength(50)]],

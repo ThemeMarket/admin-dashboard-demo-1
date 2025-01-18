@@ -121,6 +121,11 @@ export class OverviewComponent implements OnInit {
       this.bestOffersProducts.set(bestOffersProducts);
     });
 
-    this.orderService.getAll().subscribe((orders) => this.orders.set(orders));
+    this.orderService.getAll().subscribe((orders) => {
+      /* Retrieve the last six orders */
+      orders = orders.filter((_, index) => index >= orders.length - 6);
+
+      this.orders.set(orders);
+    });
   }
 }

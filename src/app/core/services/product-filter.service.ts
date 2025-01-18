@@ -12,6 +12,12 @@ export interface Filters {
   providedIn: 'root',
 })
 export class ProductFilterService {
+  /**
+   *
+   * @param products - Array of products to be filtered
+   * @param filters - Filters to filter the products array
+   * @returns - An array of filtered products
+   */
   filter(products: Product[], filters: Filters): Product[] {
     const { category, fromPrice, toPrice, searchTerm } = filters;
 

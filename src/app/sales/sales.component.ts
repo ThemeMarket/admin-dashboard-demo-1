@@ -34,6 +34,7 @@ export class SalesComponent {
   orderStatus = input<string>();
   page = input<string>();
 
+  /* Query Params mapped to usable values */
   protected selectedPage = computed(() => Number(this.page()) || 1);
 
   constructor() {
