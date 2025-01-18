@@ -22,19 +22,19 @@ Plantilla de panel de administración de productos totalmente gratuita, desarrol
 ### Overview
 
 <div style="display: flex; justify-content: center;">
-    <img src="./public/img/previews/overview.webp" style="max-width: 100%; height: auto; margin: 10px;">
+    <img src="./public/previews/overview.webp" style="max-width: 100%; height: auto; margin: 10px;">
 </div>
 
 ### Products
 
 <div style="display: flex; justify-content: center;">
-    <img src="./public/img/previews/products.webp" style="max-width: 100%; height: auto; margin: 10px;">
+    <img src="./public/previews/products.webp" style="max-width: 100%; height: auto; margin: 10px;">
 </div>
 
 ### Orders
 
 <div style="display: flex; justify-content: center;">
-    <img src="./public/img/previews/orders.webp" style="max-width: 100%; height: auto; margin: 10px;">
+    <img src="./public/previews/orders.webp" style="max-width: 100%; height: auto; margin: 10px;">
 </div>
 
 ## Instalación
