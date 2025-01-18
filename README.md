@@ -74,7 +74,10 @@ npm install
 ng serve
 ```
 
-### Levanta la API falsa para servir los productos usando JSON Server
+### Levanta el mock de la API
+
+Por defecto el proyecto usa JSON Server para realizar un mock de la API y servir los productos y las órdenes
+desde un archivo JSON, para levantar la API debes ejecutar el siguiente comando:
 
 ```bash
 npm run mock-api
