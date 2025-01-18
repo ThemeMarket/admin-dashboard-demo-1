@@ -1,59 +1,84 @@
-# AdminDashboardDemo1
+# Admin Dashboard Demo 1
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.0.6.
+Plantilla de panel de administración de productos totalmente gratuita, desarrollada con Angular 19 y TailwindCSS.
 
-## Development server
+## Características
 
-To start a local development server, run:
+- Vista general de las ventas.
+- Páginas de login, registro y restablecimiento de contraseñas.
+- Vista de manipulación, edición y creación de productos funcional.
+
+## Dependencias
+
+- Angular v19.0.0
+- Flowbite v2.5.2
+- TailwindCSS v3.4.17
+- rxjs v7.8.0
+- ApexCharts v4.3.0
+- ng-apexcharts v1.15.0
+
+## Previews
+
+### Overview Page
+
+<div style="display: flex; justify-content: center;">
+    <img src="./public/img/previews/overview.png" style="max-width: 100%; height: auto; margin: 10px;">
+</div>
+
+### Products Page
+
+<div style="display: flex; flex-wrap: wrap; justify-content: center;">
+    <img src="./public/img/previews/products.png" style="flex: 1 1 45%; max-width: 45%; margin: 10px;">
+    <img src="./public/img/previews/add-product-modal.png" style="flex: 1 1 45%; max-width: 45%; margin: 10px;">
+    <img src="./public/img/previews/edit-product-modal.png" style="flex: 1 1 45%; max-width: 45%; margin: 10px;">
+</div>
+
+### Orders
+
+<div style="display: flex; justify-content: center;">
+    <img src="./public/img/previews/orders.png" style="max-width: 100%; height: auto; margin: 10px;">
+</div>
+
+### Auth
+
+<div style="display: flex; flex-wrap: wrap; justify-content: center;">
+    <img src="./public/img/previews/login.png" style="flex: 1 1 45%; max-width: 45%; margin: 10px;">
+    <img src="./public/img/previews/signup.png" style="flex: 1 1 45%; max-width: 45%; margin: 10px;">
+    <img src="./public/img/previews/reset-password.png" style="flex: 1 1 45%; max-width: 45%; margin: 10px;">
+    <img src="./public/img/previews/forgot-password.png" style="flex: 1 1 45%; max-width: 45%; margin: 10px;">
+</div>
+
+## Instalación
+
+### Clona el repositorio
+
+```bash
+git clone https://github.com/ThemeMarket/admin-dashboard-demo-1.git
+```
+
+### Dirígete al proyecto
+
+```bash
+cd admin-dashboard-demo-1
+```
+
+### Instala las dependencias
+
+```bash
+npm install
+```
+
+### Levanta el servidor de desarrollo
 
 ```bash
 ng serve
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+### Levanta el mock de la API
 
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+Por defecto el proyecto usa JSON Server para realizar un mock de la API y servir los productos y las órdenes
+desde un archivo JSON, para levantar la API debes ejecutar el siguiente comando:
 
 ```bash
-ng generate --help
+npm run mock-api
 ```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.

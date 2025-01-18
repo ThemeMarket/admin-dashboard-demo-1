@@ -1,0 +1,444 @@
+<div
+  id="addProductModal"
+  tabindex="-1"
+  aria-hidden="true"
+  class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full"
+>
+  <div class="relative p-4 w-full max-w-5xl max-h-full">
+    <!-- Modal content -->
+    <div class="relative bg-white rounded-md shadow">
+      <!-- Modal header -->
+      <div
+        class="flex items-center justify-between p-4 md:p-5 border-b rounded-t"
+      >
+        <h3 class="text-xl font-semibold text-gray-900">New Product</h3>
+        <button
+          type="button"
+          class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-md text-sm w-8 h-8 ms-auto inline-flex justify-center items-center"
+          #closeBtn
+          data-modal-hide="addProductModal"
+          (click)="discard()"
+        >
+          <svg
+            class="w-3 h-3"
+            aria-hidden="true"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 14 14"
+          >
+            <path
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
+            />
+          </svg>
+          <span class="sr-only">Close modal</span>
+        </button>
+      </div>
+      <!-- Modal body -->
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <div class="p-4 md:p-5 grid grid-cols-1 lg:md:grid-cols-2 gap-4">
+          <!-- Left Side -->
+          <div class="space-y-4">
+            <h2 class="text-lg text-gray-950 font-semibold">
+              General Information
+            </h2>
+            <div class="space-y-1">
+              <label for="product-name">Name:</label>
+              <input
+                id="product-name"
+                type="text"
+                class="form-control-valid"
+                [class.form-control-invalid]="hasErrors('name', 'required')"
+                placeholder="Product name"
+                formControlName="name"
+              />
+              @if (hasErrors('name', 'required')) {
+              <p class="text-red-500 text-sm mt-0.5">
+                Product Name is required.
+              </p>
+              }
+            </div>
+            <div class="space-y-1">
+              <label for="product-description">Description:</label>
+              <textarea
+                id="product-description"
+                rows="7"
+                class="form-control-valid resize-none"
+                [class.form-control-invalid]="
+                  hasErrors('description', 'required') ||
+                  hasErrors('description', 'minlength')
+                "
+                placeholder="Type something..."
+                formControlName="description"
+              ></textarea>
+              @if (hasErrors('description', 'required')) {
+              <p class="text-red-500 text-sm mt-0.5">
+                Product Description is required.
+              </p>
+              } @if (hasErrors('description', 'minlength')) {
+              <p class="text-red-500 text-sm mt-0.5">
+                Product Description must have at least 50 characters.
+              </p>
+              }
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div class="space-y-1">
+                <label for="product-price">Base Price:</label>
+                <input
+                  id="product-price"
+                  type="number"
+                  formControlName="price"
+                  class="form-control-valid"
+                  [class.form-control-invalid]="
+                    hasErrors('price', 'required') || hasErrors('price', 'min')
+                  "
+                  placeholder="$999.99"
+                />
+                @if (hasErrors('price', 'required')) {
+                <p class="text-red-500 text-sm mt-0.5">
+                  Product price is required.
+                </p>
+                } @if (hasErrors('price', 'min')) {
+                <p class="text-red-500 text-sm mt-0.5">
+                  Product price must be greater than 0.
+                </p>
+                }
+              </div>
+              <div class="space-y-1">
+                <label for="product-stock">Stock:</label>
+                <input
+                  id="product-stock"
+                  type="number"
+                  formControlName="stock"
+                  class="form-control-valid"
+                  [class.form-control-invalid]="
+                    hasErrors('stock', 'required') ||
+                    hasErrors('stock', 'min') ||
+                    hasErrors('stock', 'pattern')
+                  "
+                  placeholder="10"
+                />
+                @if (hasErrors('stock', 'required')) {
+                <p class="text-red-500 text-sm mt-0.5">
+                  Product stock is required.
+                </p>
+                } @if (hasErrors('stock', 'min')) {
+                <p class="text-red-500 text-sm mt-0.5">
+                  Product stock must be greater than 0.
+                </p>
+                } @if (hasErrors('stock', 'pattern')) {
+                <p class="text-red-500 text-sm mt-0.5">
+                  Product stock must not be a decimal number.
+                </p>
+                }
+              </div>
+              <div class="space-y-1">
+                <label for="product-discount">Discount:</label>
+                <input
+                  id="product-discount"
+                  type="number"
+                  formControlName="discount"
+                  class="form-control-valid"
+                  [class.form-control-invalid]="hasErrors('discount', 'max')"
+                  placeholder="10%"
+                />
+                @if (hasErrors('discount', 'max')) {
+                <p class="text-red-500 text-sm mt-0.5">
+                  Product discount must be minor than 100.
+                </p>
+                }
+              </div>
+              <div class="space-y-1">
+                <span>Discount Type:</span>
+                <button
+                  type="button"
+                  id="productDiscountTypeToggle"
+                  data-dropdown-toggle="productDiscountType"
+                  class="text-gray-500 bg-gray-50 hover:bg-gray-100 focus:ring-4 focus:ring-gray-50 rounded-md inline-flex items-center justify-between w-full p-2.5 font-medium hover:text-gray-900"
+                >
+                  {{ discountType() || "None" }}
+                  <svg
+                    aria-hidden="true"
+                    class="ml-2 size-6"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                      clip-rule="evenodd"
+                    ></path>
+                  </svg>
+                </button>
+                <!-- Discount Type Dropdown -->
+                <div
+                  id="productDiscountType"
+                  class="z-10 hidden w-64 divide-y divide-gray-100 rounded-md bg-white shadow"
+                  data-popper-placement="bottom"
+                >
+                  <ul class="p-2 text-left text-sm font-medium text-gray-500">
+                    <li>
+                      <a
+                        role="button"
+                        (click)="discountType.set('')"
+                        class="group inline-flex w-full items-center rounded-md px-3 py-2 text-sm text-gray-500 hover:bg-gray-100 hover:text-gray-900"
+                      >
+                        None
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        role="button"
+                        (click)="discountType.set('Black Friday Discount')"
+                        class="group inline-flex w-full items-center rounded-md px-3 py-2 text-sm text-gray-500 hover:bg-gray-100 hover:text-gray-900"
+                      >
+                        Black Friday Discount
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        role="button"
+                        (click)="discountType.set('Christmas Discount')"
+                        class="group inline-flex w-full items-center rounded-md px-3 py-2 text-sm text-gray-500 hover:bg-gray-100 hover:text-gray-900"
+                      >
+                        Christmas Discount
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        role="button"
+                        (click)="discountType.set('Thanksgiving Discount')"
+                        class="group inline-flex w-full items-center rounded-md px-3 py-2 text-sm text-gray-500 hover:bg-gray-100 hover:text-gray-900"
+                      >
+                        Thanksgiving Discount
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        role="button"
+                        (click)="discountType.set('New Year Discount')"
+                        class="group inline-flex w-full items-center rounded-md px-3 py-2 text-sm text-gray-500 hover:bg-gray-100 hover:text-gray-900"
+                      >
+                        New Year Discount
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Right Side -->
+          <div class="space-y-4">
+            <h2 class="font-semibold text-lg text-gray-950">Upload Image</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-4">
+              @if (images().length > 0) {
+              <div
+                class="bg-gray-50 hover:bg-gray-100 rounded-md grid place-content-center p-4"
+              >
+                <img
+                  class="size-72 object-contain object-center"
+                  [src]="images()[0]"
+                  alt="New Product Main Image"
+                />
+              </div>
+              } @else {
+              <label
+                class="h-72 w-full bg-gray-50 hover:bg-gray-100 rounded-md grid place-content-center p-4 text-gray-500 hover:text-gray-900"
+              >
+                <input
+                  (change)="loadImage($event)"
+                  type="file"
+                  class="hidden"
+                />
+                <svg
+                  class="size-12"
+                  fill="currentColor"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 512 512"
+                >
+                  <path
+                    d="M0 96C0 60.7 28.7 32 64 32l384 0c35.3 0 64 28.7 64 64l0 320c0 35.3-28.7 64-64 64L64 480c-35.3 0-64-28.7-64-64L0 96zM323.8 202.5c-4.5-6.6-11.9-10.5-19.8-10.5s-15.4 3.9-19.8 10.5l-87 127.6L170.7 297c-4.6-5.7-11.5-9-18.7-9s-14.2 3.3-18.7 9l-64 80c-5.8 7.2-6.9 17.1-2.9 25.4s12.4 13.6 21.6 13.6l96 0 32 0 208 0c8.9 0 17.1-4.9 21.2-12.8s3.6-17.4-1.4-24.7l-120-176zM112 192a48 48 0 1 0 0-96 48 48 0 1 0 0 96z"
+                  />
+                </svg>
+              </label>
+              }
+              <!-- Add new images -->
+              <div class="flex flex-wrap gap-2 items-start">
+                @for (image of images(); track $index) {
+                <div
+                  class="p-4 grid place-content-center rounded-md bg-gray-50 relative"
+                >
+                  <img
+                    [src]="image"
+                    class="size-10 object-contain object-center"
+                    alt="Product Image"
+                  />
+                  <button
+                    (click)="$event.preventDefault(); deleteImage(image)"
+                    class="text-red-500 hover:text-red-600 absolute top-2 right-2 grid place-content-center"
+                  >
+                    <svg
+                      class="size-4"
+                      fill="currentColor"
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 448 512"
+                    >
+                      <path
+                        d="M135.2 17.7C140.6 6.8 151.7 0 163.8 0L284.2 0c12.1 0 23.2 6.8 28.6 17.7L320 32l96 0c17.7 0 32 14.3 32 32s-14.3 32-32 32L32 96C14.3 96 0 81.7 0 64S14.3 32 32 32l96 0 7.2-14.3zM32 128l384 0 0 320c0 35.3-28.7 64-64 64L96 512c-35.3 0-64-28.7-64-64l0-320zm96 64c-8.8 0-16 7.2-16 16l0 224c0 8.8 7.2 16 16 16s16-7.2 16-16l0-224c0-8.8-7.2-16-16-16zm96 0c-8.8 0-16 7.2-16 16l0 224c0 8.8 7.2 16 16 16s16-7.2 16-16l0-224c0-8.8-7.2-16-16-16zm96 0c-8.8 0-16 7.2-16 16l0 224c0 8.8 7.2 16 16 16s16-7.2 16-16l0-224c0-8.8-7.2-16-16-16z"
+                      />
+                    </svg>
+                  </button>
+                </div>
+                }
+                <label
+                  class="p-4 grid place-content-center rounded-md bg-gray-50 border-dashed border border-gray-500"
+                >
+                  <div class="size-10 grid place-content-center">
+                    <div class="p-1.5 rounded-full bg-primary-600">
+                      <svg
+                        class="size-3 text-white"
+                        fill="currentColor"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 448 512"
+                      >
+                        <path
+                          d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 144L48 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l144 0 0 144c0 17.7 14.3 32 32 32s32-14.3 32-32l0-144 144 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-144 0 0-144z"
+                        />
+                      </svg>
+                    </div>
+                    <input
+                      (change)="loadImage($event)"
+                      type="file"
+                      class="hidden"
+                    />
+                  </div>
+                </label>
+              </div>
+            </div>
+            <!-- Product Categories -->
+            <div class="space-y-2">
+              <span>Category:</span>
+              <button
+                type="button"
+                id="productCategoryDropdownToggle"
+                data-dropdown-toggle="productCategoryDropdown"
+                class="text-gray-500 bg-gray-50 hover:bg-gray-100 focus:ring-4 focus:ring-gray-50 rounded-md inline-flex items-center justify-between w-full p-2.5 font-medium hover:text-gray-900"
+              >
+                {{ category() || "None" }}
+                <svg
+                  aria-hidden="true"
+                  class="ml-2 size-6"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                    clip-rule="evenodd"
+                  ></path>
+                </svg>
+              </button>
+              <!-- Product Category Dropdown -->
+              <div
+                id="productCategoryDropdown"
+                class="z-10 hidden w-64 divide-y divide-gray-100 rounded-md bg-white shadow"
+                data-popper-placement="bottom"
+              >
+                <ul class="p-2 text-left text-sm font-medium text-gray-500">
+                  <li>
+                    <a
+                      role="button"
+                      (click)="category.set('')"
+                      class="group inline-flex w-full items-center rounded-md px-3 py-2 text-sm text-gray-500 hover:bg-gray-100 hover:text-gray-900"
+                    >
+                      None
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      role="button"
+                      (click)="category.set('Gift Cards')"
+                      class="group inline-flex w-full items-center rounded-md px-3 py-2 text-sm text-gray-500 hover:bg-gray-100 hover:text-gray-900"
+                    >
+                      Gift Cards
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      role="button"
+                      (click)="category.set('Clothes')"
+                      class="group inline-flex w-full items-center rounded-md px-3 py-2 text-sm text-gray-500 hover:bg-gray-100 hover:text-gray-900"
+                    >
+                      Clothes
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      role="button"
+                      (click)="category.set('TVs')"
+                      class="group inline-flex w-full items-center rounded-md px-3 py-2 text-sm text-gray-500 hover:bg-gray-100 hover:text-gray-900"
+                    >
+                      TVs
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      role="button"
+                      (click)="category.set('Laptops')"
+                      class="group inline-flex w-full items-center rounded-md px-3 py-2 text-sm text-gray-500 hover:bg-gray-100 hover:text-gray-900"
+                    >
+                      Laptops
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      role="button"
+                      (click)="category.set('Gaming/Console')"
+                      class="group inline-flex w-full items-center rounded-md px-3 py-2 text-sm text-gray-500 hover:bg-gray-100 hover:text-gray-900"
+                    >
+                      Gaming/Console
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      role="button"
+                      (click)="category.set('Phones')"
+                      class="group inline-flex w-full items-center rounded-md px-3 py-2 text-sm text-gray-500 hover:bg-gray-100 hover:text-gray-900"
+                    >
+                      Phones
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Modal footer -->
+        <div
+          class="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b"
+        >
+          <button
+            type="submit"
+            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-md text-sm px-5 py-2.5 text-center"
+          >
+            Add Product
+          </button>
+          <button
+            (click)="discard()"
+            data-modal-hide="addProductModal"
+            type="button"
+            class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-md border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100"
+          >
+            Decline
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<tm-toast #addProductModalToast />

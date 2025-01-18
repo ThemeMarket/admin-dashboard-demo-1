@@ -1,0 +1,7 @@
+.form-control-valid {
+  @apply bg-gray-50 border border-gray-100 text-gray-900 text-sm rounded-md focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5;
+}
+
+.form-control-invalid {
+  @apply bg-gray-50 border border-gray-100 text-red-500 text-sm rounded-md focus:ring-red-500 focus:border-red-500 block w-full p-2.5;
+}
