@@ -1,8 +1,8 @@
-import { initFlowbite } from 'flowbite';
-
 export function loadFlowbiteComponents() {
-  const timeoutId = setTimeout(() => {
-    initFlowbite();
+  const timeoutId = setTimeout(async () => {
+    const flowbite = await import('flowbite');
+    flowbite.initFlowbite();
+
     clearTimeout(timeoutId);
   }, 100);
 }

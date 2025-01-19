@@ -8,7 +8,6 @@ import {
   signal,
   viewChild,
 } from '@angular/core';
-import { initFlowbite } from 'flowbite';
 import { AddProductModalComponent } from './components/add-product-modal/add-product-modal.component';
 import { FilterDropdownComponent } from './components/filter-dropdown/filter-dropdown.component';
 import { SortDropdownComponent } from './components/sort-dropdown/sort-dropdown.component';
